@@ -4,17 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Requests\CartRequest;
+use Illuminate\Support\Facades\Http;
 
 class CartController extends Controller
 {
+    /**
+     * Class constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
     public function index()
     {
         try {
             $cart = cart()->checkCart();
-            $products = Product::find(array_keys($cart));
-            $total = cart()->total($cart, $products);
+            $products = cart()->getProductsInCart(array_keys($cart));
+            $total = cart()->total($cart);
+
             return view('frontend.cart', compact('cart', 'products', 'total'));
-        } catch (\Exception $th) {
+        }catch (\Exception $th) {
             session()->flush();
             return error();
         }

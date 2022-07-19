@@ -4,6 +4,19 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+.div-color{
+    display:flex;
+    align-items:end;
+    gap:10px
+}
+
+.color-circle{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    border:1px solid #e5e5e5;
+}
+
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -61,6 +74,7 @@ nav,
 section {
     display: block;
 }
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -10045,7 +10059,7 @@ a.text-dark:hover {
   Author: Colorib
   Author URI: https://www.colorib.com/
   Version: 1.0
-  Created: Colorib 
+  Created: Colorib
 ******************************************************************/
 
 /*------------------------------------------------------------------
@@ -14000,11 +14014,11 @@ button.info-paypal-btn:hover i{
 }
 
 .fw-600 {
-    font-weight: 600;   
+    font-weight: 600;
 }
 
 .fs-15 {
-    font-size: 15px;   
+    font-size: 15px;
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/

@@ -91,3 +91,8 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
     Route::post('login','AuthController@checkLogin')->name('login');
     Route::get('logout', 'AuthController@logout')->name('logout');
 });
+
+Route::get('test', function(){
+
+})->name('test');
+

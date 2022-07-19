@@ -106,6 +106,8 @@
                                         <div class="pro-qty">
                                             <input type="hidden" value="{{ $product->id }}" name="product_id"
                                                 id="product_id">
+                                            <input type="hidden" value="{{$product->price}}" id="price" name="price">
+                                            <input type="hidden" value="{{$product->discount}}" id="discount" name="discount">
                                             <input type="hidden"
                                                 value="{{ $product->attributes[0]->product_quantity }}"
                                                 id="max_qty">

@@ -27,7 +27,9 @@ class CartRequest extends FormRequest
             'product_id' => 'required',
             'quantity' => 'required|numeric|min:1',
             'size' => 'required',
-            'color' => 'required'
+            'color' => 'required',
+            'price' => 'required',
+            'discount' => 'required'
         ];
     }
 }

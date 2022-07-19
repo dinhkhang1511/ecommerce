@@ -18,7 +18,7 @@
                                 @foreach ($products as $product)
                                     @foreach ($cart[$product->id] as $index => $item)
                                         @php
-                                            $attribute = $product->firstAttribute($item);
+                                            $attribute = $product->attributes[$index];
                                         @endphp
                                         <tr>
                                             <input type="hidden" value="{{ $index }}" id="indexValue">
@@ -40,9 +40,9 @@
                                                         <span class="font-weight-bold">Size: </span>
                                                         {{ $attribute->size->name }}
                                                     </div>
-                                                    <div class="mt-2" style="color: {{ $attribute->color->code }}">
+                                                    <div class="mt-2 div-color"  >
                                                         <span class="font-weight-bold">Color: </span>
-                                                        {{ $attribute->color->name }}
+                                                        <div class="color-circle" style="background: {{ $attribute->color->code }};"></div>
                                                     </div>
                                                 </div>
                                             </td>

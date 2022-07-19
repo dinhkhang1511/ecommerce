@@ -3,10 +3,20 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Http;
 
 class CartService
 {
     private $total = 0;
+    private $api_url;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct()
+    {
+        $this->api_url = config('app.api_url');
+    }
 
     public function store($data)
     {
@@ -37,18 +47,20 @@ class CartService
         }
     }
 
-    public function checkCart()
+    public function checkCart($products = null)
     {
         $cart = session('cart', []);
-        $products = Product::find(array_keys($cart));
-        $products->each(function ($product) use ($cart) {
-            foreach ($cart[$product->id] as $index => $item) {
-                $attribute = $product->firstAttribute($item);
-                if (!$attribute) {
+        $products = $this->getProductsInCart(array_keys($cart));
+        foreach($products as $product){
+            foreach ($cart[$product->id] as $index => $item)
+            {
+                $attribute = $product->attributes[$index];
+                if (!$attribute)
+                {
                     session()->forget('cart.'.$product->id);
                 }
             }
-        });
+        }
         return session('cart', []);
     }
 
@@ -59,11 +71,28 @@ class CartService
             $products = Product::find(array_keys($cart));
         }
 
-        foreach ($products as $product) {
-            foreach ($cart[$product->id] as $index=>$item) {
-                $this->total += $cart[$product->id][$index]['quantity'] * $product->after_discount;
+        foreach ($cart as $product) {
+            foreach ($product as $index=>$item) {
+                $this->total += $item['quantity'] * $this->getPriceAfterDiscount($item);
             }
         }
         return $this->total;
+    }
+
+    private function getPriceAfterDiscount($item)
+    {
+        return $item['price'] * (float)((100 - $item['discount']) / 100);
+    }
+
+    public function getProductsInCart($arrID)
+    {
+        $response = Http::get("$this->api_url/products/find",['product_id' => $arrID]);
+        if($response->successful())
+        {
+            $products = json_decode($response->getBody()->getContents())->products;
+            return $products;
+        }
+        else
+            $response->throw();
     }
 }
