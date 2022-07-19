@@ -30,7 +30,7 @@
                                                     <h6>
                                                         <a
                                                             href="{{ route('product-details', ['product' => $product->id]) }}">
-                                                            {{ $product->name }}
+                                                            {{$product->name}}
                                                         </a>
                                                     </h6>
                                                     <input type="hidden" id="price_after_discount"
