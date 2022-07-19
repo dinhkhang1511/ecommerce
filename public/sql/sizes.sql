@@ -1,0 +1,18 @@
+INSERT INTO `sizes` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'S', NULL, NULL),
+(2, 'M', NULL, NULL),
+(3, 'L', NULL, NULL),
+(4, 'XL', NULL, NULL),
+(5, 'XS', NULL, NULL),
+(6, '35', NULL, NULL),
+(7, '36', NULL, NULL),
+(8, '37', NULL, NULL),
+(9, '38', NULL, NULL),
+(10, '39', NULL, NULL),
+(11, '40', NULL, NULL),
+(12, '41', NULL, NULL),
+(13, '42', NULL, NULL),
+(14, '43', NULL, NULL),
+(15, '44', NULL, NULL),
+(16, '45', NULL, NULL),
+(17, 'NS', '2021-05-17 06:13:34', '2021-05-17 06:13:34');

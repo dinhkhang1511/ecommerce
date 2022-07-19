@@ -1,0 +1,291 @@
+[33mcommit a2fe71ecf14e42efdc3c13f2968f7d7fdeb82d52[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: dinhkhang1511 <dinhkhang1511@gmail.com>
+Date:   Tue Jul 19 10:35:07 2022 +0700
+
+    init project
+
+[33mcommit 8a68e880124dfb274d715a8c18f83b666e5627cc[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 31 11:18:24 2021 +0700
+
+    Fix product details
+
+[33mcommit 85c74280f3571e046c83e138a1e77706cce86cb2[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 27 19:15:28 2021 +0700
+
+    Update something
+
+[33mcommit 32c11bd7e55ba1d32e0dcd4872095073aa72af1d[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 27 19:00:51 2021 +0700
+
+    update
+
+[33mcommit 766824b90275fd51b38c30578a7c8d4917923385[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Wed May 26 19:22:22 2021 +0700
+
+    Optimize something
+
+[33mcommit 418f651d8197edda2ef125b4265cd560f3ef8bcf[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Wed May 26 09:52:38 2021 +0700
+
+    Trying to eliminate render-blocking resources
+
+[33mcommit ce0049b5cad2286ace1468a1d7f0f552d8dfda8f[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Wed May 26 09:33:51 2021 +0700
+
+    Minify Js and Css
+
+[33mcommit a5b711ee2a0e25308ea7dd6def0e61e7196ab78d[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Tue May 25 16:29:00 2021 +0700
+
+    Fix something
+
+[33mcommit 641c06a3d9a5f140a7a28e6622f261025e16c510[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 24 22:26:50 2021 +0700
+
+    test enable text compression
+
+[33mcommit b597d17b9045f6461d6a8886fe0e2ae7e095eafd[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 24 18:30:31 2021 +0700
+
+    Test using cache
+
+[33mcommit a288792c62614cd2e25310b7bedd9f57a76c26fb[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 24 18:12:00 2021 +0700
+
+    Test using cache
+
+[33mcommit 58ea510ec0cbd4c1a4f9ff589a6fd906a8237664[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 24 17:48:54 2021 +0700
+
+    Test using cache
+
+[33mcommit e61e9953052342293cb3ac78546eea7dd82d8527[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 24 15:45:53 2021 +0700
+
+    Optimize js files
+
+[33mcommit 3c53a38258fd44786af33d092a3831a7f85abc7c[m
+Merge: 251ec95 b359b77
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 22 22:02:11 2021 +0700
+
+    Optimize something
+
+[33mcommit 251ec95fb966e21bf16897578a2645f4f0d0b81b[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 22 18:00:07 2021 +0700
+
+    Optimize something
+
+[33mcommit b6dea24179e411243cebfdf2c0e0a496e4ce3195[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 20 19:16:42 2021 +0700
+
+    Add try-catch to socialController
+
+[33mcommit b359b772789429b6c7ec265cde0622c7909a0bb5[m
+Author: thanhphu2410 <64239204+thanhphu2410@users.noreply.github.com>
+Date:   Thu May 20 17:31:21 2021 +0700
+
+    Update README.md
+
+[33mcommit bcf6c47a05947fe9ef9ad7c72e70f407108903d3[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 20 17:28:22 2021 +0700
+
+    Update something
+
+[33mcommit 28934a56ce1d0bf2fc8bd839837f1be5e4a72458[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Wed May 19 16:31:12 2021 +0700
+
+    BIG UPDATE
+
+[33mcommit bd0587ef7bc9fa4d62f2ada6afda78d2a70401a8[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 15 17:02:06 2021 +0700
+
+    optimize code
+
+[33mcommit d0a61af696b17769b7e48a4a5b0331f6113853f6[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Fri May 14 00:10:51 2021 +0700
+
+    edit login page
+
+[33mcommit 278786a6335e0addfa2630838c17afccb41c29bb[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Fri May 14 00:04:36 2021 +0700
+
+    add password reset link
+
+[33mcommit 3ee4e719b97764e1cd766b464c4077cc9c320dad[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Fri May 14 00:01:33 2021 +0700
+
+    Release password reset
+
+[33mcommit 5eaadfd9eff74ac7f8683b115e739ea80f5f4abd[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 13 23:58:52 2021 +0700
+
+    Update something
+
+[33mcommit 4e490cbe9ef17086f967387f380e98ce82be438c[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Wed May 12 20:50:15 2021 +0700
+
+    Fix login with facebook
+
+[33mcommit f68ba958807f6c143d01edec6e996be7e9c17a81[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Tue May 11 00:28:10 2021 +0700
+
+    Test queue worker in heroku
+
+[33mcommit 150a42e96625cc5f57aff3834d29a115a4497b7d[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 10 23:35:33 2021 +0700
+
+    Add comments
+
+[33mcommit 91d3c42a32be8c1c2be42638c662cdcb6de78cc4[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 10 22:32:59 2021 +0700
+
+    Update something
+
+[33mcommit 2f2c92386dcbec850e0981dc794060542c6e1366[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 10 15:28:46 2021 +0700
+
+    Update something
+
+[33mcommit 2f234dc606c9a54ae10fb23939555587c342da86[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 10 10:50:50 2021 +0700
+
+    Update cart
+
+[33mcommit f7d3d222ee1e57c6cc96a3b8e6be7f3c487f32a8[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Mon May 10 00:13:33 2021 +0700
+
+    Fix checkout
+
+[33mcommit 06c331936fb77605645cd4dc8e7891fa46115415[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 23:23:02 2021 +0700
+
+    Update tab image in product details
+
+[33mcommit a754f97a58bb618a687bc58b0efbb3ba8a57177d[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 20:36:02 2021 +0700
+
+    Add lightbox.js to product details
+
+[33mcommit d57049514c741156dcfb7671e506efa540127dd3[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 18:13:49 2021 +0700
+
+    Release gg login
+
+[33mcommit f31d692f52d2d1eaba5b4f954cff47bf0c7f52c4[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 16:42:26 2021 +0700
+
+    Test gg login
+
+[33mcommit e4a931736e9eeab7e123b1c18f626ca98de7039b[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 16:02:31 2021 +0700
+
+    Release fb login
+
+[33mcommit c67ea1083a4ec10a154933dda96cbe0117b0c388[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 15:54:42 2021 +0700
+
+    Test fb login
+
+[33mcommit beb827a48f945b433a66b67814aee6e985174bad[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 15:49:10 2021 +0700
+
+    Test fb login
+
+[33mcommit 596a3cdf0a6adc969ce4830b6b24ac6aee9e50b6[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sun May 9 11:38:06 2021 +0700
+
+    Edit login register pages
+
+[33mcommit fd420045777f02c164e68036b60020600af4beb1[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 8 22:43:25 2021 +0700
+
+    Fix cart
+
+[33mcommit c63a795d94dd938e7362bcefdfe713231a74c1eb[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 8 14:16:54 2021 +0700
+
+    Fix product details bug
+
+[33mcommit f2673ae2a3788c376bf22bbefda7752c9d1b9ade[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Sat May 8 10:06:22 2021 +0700
+
+    Fix product details bug
+
+[33mcommit d56a39cd151bbf515146919e7a0272f96be775bf[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Fri May 7 23:18:08 2021 +0700
+
+    Fix something
+
+[33mcommit e5adab0d3df8aa9191ca070bf58257c165c48df5[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 6 20:58:51 2021 +0700
+
+    Add provinces, districts, wards seeder
+
+[33mcommit 1944b9b4de2950dff7b39c8fd81c14af60901bdb[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 6 17:28:01 2021 +0700
+
+    Fix wishlish bug
+
+[33mcommit 7cd4ac145634344d010733725d63b2aece928fd2[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 6 16:53:45 2021 +0700
+
+    Fix review bug
+
+[33mcommit 8d534d7fc49febd2b74c37f50e6a4c0cdb21809a[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 6 15:08:38 2021 +0700
+
+    Change file upload directory
+
+[33mcommit 54ccea13032009e632ae8e44221f12fa387d34f5[m
+Author: Phú Trần <thanhphu2410@gmail.com>
+Date:   Thu May 6 13:35:24 2021 +0700
+
+    Test upload file heroku
+
+[33mcommit 329bb4033c02bf8e54ca1e9b62775622b9f1ae4b[m
+Author: Phú Trần <t

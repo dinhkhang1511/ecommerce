@@ -1,0 +1,75 @@
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(170, 168, 168);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.error {
+    color: #e46a76;
+    font-weight: 600;
+    font-size: 12px;
+}
+.btn-none,
+.btn-none:focus {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+.of-cover {
+    object-fit: cover;
+}
+
+.round {
+    background: none !important;
+}
+.round img {
+    object-fit: cover;
+    border-radius: 50% !important;
+}
+.customer-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profiletimeline {
+    padding-left: 0 !important;
+    border: none !important;
+}
+.profiletimeline .body {
+    color: black;
+}
+.profiletimeline .fa-star {
+    color: #ff9900;
+}
+.album-image {
+    height: 162px;
+    object-fit: cover;
+}
+th,
+td {
+    text-align: center !important;
+}
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.icon-btn:focus {
+    outline: none;
+}
