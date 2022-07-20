@@ -6,6 +6,7 @@ use App\Models\Province;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\PasswordUpdateRequest;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -18,11 +19,15 @@ class ProfileController extends Controller
 
     public function updateProfile(ProfileUpdateRequest $request)
     {
-        if (request()->has('avatar')) {
-            delete_file(auth()->user()->avatar);
+        if($user = session('user'))
+        {
+            if (request()->has('avatar')) {
+                delete_file($user->avatar);
+            }
+            User::find($user->id)->update($request->validated());
+            return success('edit-profile');
         }
-        auth()->user()->update($request->validated());
-        return success('edit-profile');
+        else return error();
     }
 
     public function editPassword()

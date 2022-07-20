@@ -68,7 +68,7 @@ class CartService
     {
         if ($products == null) {
             $cart = session('cart', []);
-            $products = Product::find(array_keys($cart));
+            $products = $this->getProductsInCart(array_keys($cart));
         }
 
         foreach ($cart as $product) {
@@ -86,6 +86,8 @@ class CartService
 
     public function getProductsInCart($arrID)
     {
+        if(!$arrID)
+            return [];
         $response = Http::get("$this->api_url/products/find",['product_id' => $arrID]);
         if($response->successful())
         {

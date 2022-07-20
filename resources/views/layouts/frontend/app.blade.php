@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{$api_url .'images/favicon.svg' }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{$api_asset_url .'images/favicon.svg' }}">
     <title>{{ $setting->site_title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -192,7 +192,7 @@
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#">
-                            <img src="{{ $api_url. 'images/details-payment.png' }}" alt="">
+                            <img src="{{ $api_asset_url. 'images/details-payment.png' }}" alt="">
                         </a>
                     </div>
                 </div>

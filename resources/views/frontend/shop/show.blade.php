@@ -37,8 +37,8 @@
                     <div class="col-lg-6 col-md-9 mb-5">
                         <div class="tab-content">
                             <div class="product__details__pic__item">
-                                <a href="{{$api_url . $product->first_image }}" data-lightbox="main-image" id="main-image-link">
-                                    <img src="{{$api_url . $product->first_image }}" class="img-thumbnail" id="main-image">
+                                <a href="{{$api_asset_url . $product->first_image }}" data-lightbox="main-image" id="main-image-link">
+                                    <img src="{{$api_asset_url . $product->first_image }}" class="img-thumbnail" id="main-image">
                                 </a>
                             </div>
                         </div>
@@ -47,10 +47,10 @@
                                 @foreach ($attribute->images as $imageKey => $image)
                                     <div class="tab-image @if ($attributeKey==0 && $imageKey==0) active @endif">
                                         <a href="#tab{{ $image->id }}">
-                                            <input type="hidden" value="{{$api_url . $image->path }}"
+                                            <input type="hidden" value="{{$api_asset_url . $image->path }}"
                                                 id="attribute{{ $attribute->id }}">
                                             <div class="product__thumb__pic set-bg img-thumbnail"
-                                                data-setbg="{{$api_url . $image->path }}"></div>
+                                                data-setbg="{{$api_asset_url . $image->path }}"></div>
                                         </a>
                                     </div>
                                 @endforeach
@@ -174,7 +174,7 @@
                                         @if(isset($user->email))
                                             <div class="row p-3">
                                                 <div class="row col-3 align-items-center">
-                                                    <img src="{{$api_url . $user->avatar }}" alt="" width="50"
+                                                    <img src="{{$api_asset_url . $user->avatar }}" alt="" width="50"
                                                         class="mr-3 avatar">
                                                     <a href="{{ route('login') }}" class="font-weight-bold"
                                                         data-toggle="modal" data-target="#reviews" style="color: #9d9d9d">Click
@@ -184,7 +184,7 @@
                                         @else
                                             <div class="row p-3">
                                                 <div class="row col-3 align-items-center">
-                                                    <img src="{{$api_url}}images/avatar-default.svg" alt="" width="50" class="mr-3">
+                                                    <img src="{{$api_asset_url}}images/avatar-default.svg" alt="" width="50" class="mr-3">
                                                     <a href="{{ route('login') }}" class="font-weight-bold"
                                                         style="color: #9d9d9d">Login to reviews</a>
                                                 </div>
@@ -201,7 +201,7 @@
                                         @foreach ($reviews as $review)
                                             <div class="row p-3 border-bottom">
                                                 <div class="row col-3 align-items-start">
-                                                    <img src="{{$api_url . $review->user->avatar }}" alt="" width="50"
+                                                    <img src="{{$api_asset_url . $review->user->avatar }}" alt="" width="50"
                                                         class="mr-3 avatar">
                                                     <div>
                                                         <p class="font-weight-bold">{{ $review->user->name }}</p>
@@ -223,9 +223,9 @@
                                                     <p>{{ $review->body }}</p>
                                                     <div>
                                                         @foreach ($review->images as $image)
-                                                            <a href="{{$api_url . $image->path }}"
+                                                            <a href="{{$api_asset_url . $image->path }}"
                                                                 data-lightbox="album{{ $review->id }}">
-                                                                <img src="{{$api_url . $image->path }}" class="image-review mr-2"
+                                                                <img src="{{$api_asset_url . $image->path }}" class="image-review mr-2"
                                                                     width="120" height="120">
                                                             </a>
                                                         @endforeach
@@ -295,7 +295,7 @@
                     @foreach ($relatedProducts as $product)
                         <div class="col-12">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{$api_url . $product->first_image }}">
+                                <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url . $product->first_image }}">
                                     @if ($product->discount > 0)
                                         <span class="label">Sale</span>
                                     @endif

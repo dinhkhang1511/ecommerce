@@ -241,6 +241,7 @@ function ajaxFilter() {
 
 $("#shop_loadmore").on("click", function(e) {
     e.preventDefault();
+    console.log('click')
     $("#shop_loadmore").html(
         '<div class="spinner-border spinner-border-sm" role="status">' +
             '<span class="sr-only">Loading...</span>' +
@@ -325,10 +326,9 @@ function renderProducts(item) {
 
     for (var i = 5; i > item.rating_star; i--)
         starRender += '<i class="fa fa-star-o"></i> ';
-
     $("#products").append(
         '<div class="col-lg-4 col-md-6 col-6">' +
-            '<div class="product__item sale">' +
+            '<div class="product__item sales khang123">' +
             '<div class="product__item__pic set-bg" style="background-image: url(/' +
             item.first_image +
             ');">' +
@@ -379,4 +379,6 @@ function renderProducts(item) {
             "</div>" +
             "</div>"
     );
+
+
 }

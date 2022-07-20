@@ -24,9 +24,10 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        $user = session('user');
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'gender' => ['nullable', 'string'],
             'date_of_birth' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],

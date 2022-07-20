@@ -19,7 +19,7 @@
                 @endif
                 <div class="modal-body">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="page mb-3">
                         <div class="page__demo">
                             <div class="page__group">
@@ -68,11 +68,11 @@
                                 </div>
                             </div>
                         </div>
-                        @error('rating') 
+                        @error('rating')
                             <div class="error text-center">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <div class="form-group">
                         <textarea class="form-control" rows="3" id="review"
                         placeholder="Share your feedback, reviews about this product" name="body"></textarea>

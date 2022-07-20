@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\CartService;
+use App\Services\GetDataService;
 use Illuminate\Support\Facades\File;
 
 if (! function_exists('success')) {
@@ -46,5 +47,12 @@ if (! function_exists('cart')) {
     function cart()
     {
         return new CartService();
+    }
+
+    if (! function_exists('getData')) {
+        function getData()
+        {
+            return new GetDataService();
+        }
     }
 }

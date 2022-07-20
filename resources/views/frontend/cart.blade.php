@@ -15,16 +15,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
-                                    @foreach ($cart[$product->id] as $index => $item)
-                                        @php
-                                            $attribute = $product->attributes[$index];
-                                        @endphp
+                                @php
+                                    foreach ($products as $product)
+                                    {
+                                        $attributes = collect($product->attributes);
+                                        foreach ($cart[$product->id] as $index => $item)
+                                        {
+                                            $filtered = $attributes->filter(function($value,$key) use($item)
+                                            {
+                                                if($value->size_id == $item['size'] && $value->color_id == $item['color'])
+                                                    return $value;
+                                            });
+                                            $attribute = $filtered->first();
+
+                                @endphp
                                         <tr>
                                             <input type="hidden" value="{{ $index }}" id="indexValue">
                                             <td class="product__cart__item">
                                                 <div class="product__cart__item__pic mb-3">
-                                                    <img src="{{$attribute->images[0] ? $api_url . $attribute->images[0]->path : '' }}" alt="">
+                                                    <img src="{{$attribute->images[0] ? $api_asset_url . $attribute->images[0]->path : '' }}" alt="">
                                                 </div>
                                                 <div class="product__cart__item__text">
                                                     <h6>
@@ -69,8 +78,9 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    @endforeach
-                                @endforeach
+                                @php
+                                    }};
+                                @endphp
                             </tbody>
                         </table>
 

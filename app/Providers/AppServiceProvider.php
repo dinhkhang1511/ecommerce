@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('layouts.frontend.app', function ($view) {
             $cart = session('cart', []);
-            $products = Product::find(array_keys($cart));
+            $products = cart()->getProductsInCart(array_keys($cart));
             $amount = 0;
             foreach ($products as $item) {
                 foreach (session('cart.'.$item->id) as $key=>$value) {
@@ -56,7 +56,6 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('error', session('error'));
                 session()->forget('error');
             }
-
             $view->with('setting', SystemSetting::all()->first());
         });
 
@@ -67,7 +66,13 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function($view){
             if(session()->has('user'))
                 $view->with('user',session('user'));
-            $view->with('api_url',config('app.api_asset_url'));
+            $view->with('api_asset_url',config('app.api_asset_url'));
+            $view->with('api_url',config('app.api_url'));
+
+        });
+
+        view()->composer('backend.setting.*', function ($view) {
+            $view->with('setting', SystemSetting::all()->first());
         });
 
         // view()->composer('layouts.backend.app', function ($view) {

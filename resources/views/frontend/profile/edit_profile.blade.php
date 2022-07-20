@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <h6 class="checkout__title">Basic Information</h6>
                         <div class="row justify-content-md-center align-items-center">
-                            <img src="/{{ $user->avatar }}" class="avatar" style="width: 100px; height: 100px; margin: auto">
+                            <img src="{{$api_asset_url . $user->avatar }}" class="avatar" style="width: 100px; height: 100px; margin: auto">
                             <div class="col-lg-12">
                                 <div class="checkout__input">
                                     <p>Avatar</p>
@@ -45,7 +45,7 @@
                                     <p>Full Name <span>*</span></p>
                                     <input type="text" placeholder="Full Name" name="name" autocomplete="off"
                                     value="{{ $user->name }}">
-                                    @error('name') 
+                                    @error('name')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -56,7 +56,7 @@
                                     <p>Date of birth </p>
                                     <input type="text" placeholder="Date of birth" name="date_of_birth" autocomplete="off"
                                     class="date" value="{{ $user->date_of_birth }}">
-                                    @error('date_of_birth') 
+                                    @error('date_of_birth')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -75,7 +75,7 @@
                                         @if($user->gender == 'Female') checked @endif>
                                         <label class="custom-control-label" for="female">Female</label>
                                     </div>
-                                    @error('gender') 
+                                    @error('gender')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -90,7 +90,7 @@
                                     <p>Phone </p>
                                     <input type="text" placeholder="Phone number" name="phone" autocomplete="off"
                                     value="{{ $user->phone }}">
-                                    @error('phone') 
+                                    @error('phone')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -100,19 +100,19 @@
                                 <div class="checkout__input">
                                     <p>Email <span>*</span></p>
                                     <input type="text" placeholder="Email" name="email" autocomplete="off"
-                                    value="@auth {{ $user->email }} @else {{ old('email') }} @endauth">
-                                    @error('email') 
+                                    value="@if(isset($user)) {{ $user->email }} @else {{ old('email') }} @endif">
+                                    @error('email')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-12">
                                 <div class="checkout__input">
                                     <p>Address </p>
                                     <input type="text" placeholder="Your Address" class="checkout__input__add" autocomplete="off" name="address"
-                                     value="@auth {{ $user->address }} @else {{ old('address') }} @endauth">
-                                    @error('address') 
+                                     value="@if(isset($user)) {{ $user->address }} @else {{ old('address') }} @endif">
+                                    @error('address')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -123,13 +123,13 @@
                                     <select id="province" name="province_id">
                                         <option selected value="">Select province</option>
                                         @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}" 
+                                            <option value="{{ $province->id }}"
                                                 @if($province->id == $user->province_id) selected @endif>
                                                 {{ $province->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('province_id') 
+                                    @error('province_id')
                                         <div class="error error-nice-select">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -140,7 +140,7 @@
                                     <select id="district" name="district_id">
                                         @if ($user->province_id != null)
                                             @foreach ($user->province->load('districts')->districts as $district)
-                                                <option value="{{ $district->id }}" 
+                                                <option value="{{ $district->id }}"
                                                     @if($district->id == $user->district_id) selected @endif>
                                                     {{ $district->name }}
                                                 </option>
@@ -149,7 +149,7 @@
                                             <option selected value="">Select District</option>
                                         @endif
                                     </select>
-                                    @error('district_id') 
+                                    @error('district_id')
                                         <div class="error error-nice-select">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -160,7 +160,7 @@
                                     <select id="ward" name="ward_id">
                                         @if ($user->district_id != null)
                                             @foreach ($user->district->load('wards')->wards as $ward)
-                                                <option value="{{ $ward->id }}" 
+                                                <option value="{{ $ward->id }}"
                                                     @if($ward->id == $user->ward_id) selected @endif>
                                                     {{ $ward->name }}
                                                 </option>
@@ -170,7 +170,7 @@
                                         @endif
                                     </select>
                                 </div>
-                                @error('ward_id') 
+                                @error('ward_id')
                                     <div class="error error-nice-select">{{ $message }}</div>
                                 @enderror
                             </div>

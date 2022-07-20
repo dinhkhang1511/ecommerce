@@ -24,7 +24,7 @@ class AjaxController extends Controller
                     ->where('size_id', $size)
                     ->get()
                     ->unique('color_id');
-                    
+
         $attributes->load('color');
         return $attributes;
     }
@@ -42,7 +42,7 @@ class AjaxController extends Controller
         $province->load('districts');
         return response()->json($province->districts);
     }
-    
+
     public function getWards(District $district)
     {
         $district->load('wards');

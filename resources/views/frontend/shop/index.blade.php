@@ -31,7 +31,7 @@
                         </div>
                         <div class="shop__sidebar__accordion">
                             <input type="hidden" id="filterUrl"
-                                value="/filter?sortby=asc&category={{ request('category') }}&subcategory={{ request('subcategory') }}&sale={{ request('sale', 'no') }}&price=&size=&color=&name=&offset={{ $products->count() }}&limit=5">
+                                value="{{$api_url}}/filter?sortby=asc&category={{ request('category') }}&subcategory={{ request('subcategory') }}&sale={{ request('sale', 'no') }}&price=&size=&color=&name=&offset={{ $products->count() }}&limit=5">
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
                                     <div class="card-heading">
@@ -199,7 +199,7 @@
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-6">
                                 <div class="product__item sale">
-                                    <div class="product__item__pic set-bg" data-setbg="/{{ $product->first_image }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url. $product->first_image }}">
                                         @if ($product->discount > 0)
                                             <span class="label">Sale</span>
                                         @endif

@@ -25,19 +25,26 @@ class ShopController extends Controller
 
     public function index()
     {
-        $products = $this->filter();
-        $categories = Cache::remember('categories', now()->addMinutes(10), function () {
-            return Category::all();
-        });
-        $subCategories = Cache::remember('subCategories', now()->addMinutes(10), function () {
-            return SubCategory::all();
-        });
-        $sizes = Cache::remember('sizes', now()->addMinutes(10), function () {
-            return Size::all();
-        });
-        $colors = Cache::remember('colors', now()->addMinutes(10), function () {
-            return Color::all();
-        });
+        $products = getData()->getDataFromType('filter');
+        $products = collect($products);
+        $categories = getData()->getDataFromType('categories')->categories;
+        $subCategories = getData()->getDataFromType('subCategories')->subCategories;
+        $sizes = getData()->getDataFromType('sizes')->sizes;
+        $colors = getData()->getDataFromType('colors')->colors;
+
+
+        // $categories = Cache::remember('categories', now()->addMinutes(10), function () {
+        //     return Category::all();
+        // });
+        // $subCategories = Cache::remember('subCategories', now()->addMinutes(10), function () {
+        //     return SubCategory::all();
+        // });
+        // $sizes = Cache::remember('sizes', now()->addMinutes(10), function () {
+        //     return Size::all();
+        // });
+        // $colors = Cache::remember('colors', now()->addMinutes(10), function () {
+        //     return Color::all();
+        // });
         // $categories = Category::all();
         // $subCategories = SubCategory::all();
         // $sizes = Size::all();
@@ -64,34 +71,10 @@ class ShopController extends Controller
             $reviews = $data->reviews;
             // * Filter data
 
-            $getSizes = function() use ($product){
-                $tempSizes = [];
-                foreach($product->attributes as $attribute)
-                {
-                    dd($attribute);
-                    $isExist = false;
-                    foreach($tempSizes as $size)
-                    {
-                        if($size->size_id === $attribute->size_id)
-                        {
-                            $isExist = true;
-                            break;
-                        }
-                    }
-                    if(!$isExist)
-                        $tempSizes[] = $attribute;
-                }
-                return $tempSizes;
-            };
             $sizes = [];
             $colors = [];
             $this->filterAttributes($sizes,$colors,$product);
 
-
-
-
-            // $sizes = $data->sizes;
-            // $colors = $data->colors;
             return view('frontend.shop.show', compact('product', 'relatedProducts', 'reviews', 'sizes', 'colors'));
         }
         return redirect('home')->with('error','Something went wrong...');
@@ -123,7 +106,7 @@ class ShopController extends Controller
     }
 
 
-    private function filterAttributes(&$sizes,&$colors,$product)
+    private function filterAttributes(&$sizes,&$colors,$product) // Loc attributes
     {
             $tempSizes  = [];
             $tempColors = [];

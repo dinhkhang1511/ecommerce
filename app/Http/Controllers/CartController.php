@@ -20,7 +20,7 @@ class CartController extends Controller
         try {
             $cart = cart()->checkCart();
             $products = cart()->getProductsInCart(array_keys($cart));
-            $total = cart()->total($cart);
+            $total = cart()->total($cart,$products);
 
             return view('frontend.cart', compact('cart', 'products', 'total'));
         }catch (\Exception $th) {

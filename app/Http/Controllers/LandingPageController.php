@@ -14,7 +14,7 @@ class LandingPageController extends Controller
 
     public function index(Product $product)
     {
-        $api_url = config('app.api_url');
+        $api_url = $this->api_url;
         $response = Http::get("$api_url/home");
         if($response->successful())
         {
@@ -29,6 +29,7 @@ class LandingPageController extends Controller
             $album = $data->album;
             return view('frontend.index', compact('bestSellers', 'newArrivals', 'hotSales', 'blogs', 'categories', 'album'));
         }
-        abort(404);
+        else
+            $response->throw();
     }
 }

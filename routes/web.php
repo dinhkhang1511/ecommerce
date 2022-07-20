@@ -36,7 +36,7 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
     Route::get('wards/{district}', 'AjaxController@getWards');
     Route::get('paypal-paid', 'AjaxController@paypalPaid');
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth.web'])->group(function () {
         Route::resource('wishlist', 'WishListController');
         Route::post('review/{product}', 'ProductReviewController')->name('review');
         Route::get('edit-profile', 'ProfileController@editProfile')->name('edit-profile');

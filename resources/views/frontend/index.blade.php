@@ -56,10 +56,10 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ $api_url . 'images/background_1.jpeg' }}" class="d-block w-100">
+                    <img src="{{ $api_asset_url . 'images/background_1.jpeg' }}" class="d-block w-100">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ $api_url . 'images/background_2.jpeg' }}" class="d-block w-100">
+                    <img src="{{ $api_asset_url . 'images/background_2.jpeg' }}" class="d-block w-100">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -82,7 +82,7 @@
                     <div class="col-lg-{{ $index == 1 ? 5 : 7 }} @if ($index==0) offset-lg-4 @endif">
                         <div class="banner__item {{ $classes[$index] }}">
                             <div class="banner__item__pic">
-                                <img width="450" height="450" src="{{ $api_url . $item->image_path }}" />
+                                <img width="450" height="450" src="{{ $api_asset_url . $item->image_path }}" />
                             </div>
                             <div class="banner__item__text">
                                 <h2>{{ $item->name }}</h2>
@@ -109,7 +109,7 @@
                         @foreach ($bestSellers as $product)
                             <div class="col-12">
                                 <div class="product__item sale">
-                                    <div class="product__item__pic set-bg" data-setbg="{{$api_url . $product->first_image }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url . $product->first_image }}">
                                         @if ($product->discount > 0)
                                             <span class="label">Sale</span>
                                         @endif
@@ -173,7 +173,7 @@
                         @foreach ($newArrivals as $product)
                             <div class="col-12">
                                 <div class="product__item sale">
-                                    <div class="product__item__pic set-bg" data-setbg="{{$api_url . $product->first_image }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url . $product->first_image }}">
                                         @if ($product->discount > 0)
                                             <span class="label">Sale</span>
                                         @endif
@@ -237,7 +237,7 @@
                         @foreach ($hotSales as $product)
                             <div class="col-12">
                                 <div class="product__item sale">
-                                    <div class="product__item__pic set-bg" data-setbg="{{$api_url . $product->first_image }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url . $product->first_image }}">
                                         @if ($product->discount > 0)
                                             <span class="label">Sale</span>
                                         @endif
@@ -300,8 +300,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8">
                         <div class="instagram__pic">
-                            @foreach ($album->load('images')->images as $item)
-                                <div class="instagram__pic__item set-bg" data-setbg="{{$api_url . $item->path }}"></div>
+                            @foreach ($album->images as $item)
+                                <div class="instagram__pic__item set-bg" data-setbg="{{$api_asset_url . $item->path }}"></div>
                             @endforeach
                         </div>
                     </div>
@@ -329,7 +329,7 @@
                 @foreach ($blogs as $blog)
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="blog__item">
-                            <div class="blog__item__pic set-bg" data-setbg="{{$api_url . $blog->image_path }}"></div>
+                            <div class="blog__item__pic set-bg" data-setbg="{{$api_asset_url . $blog->image_path }}"></div>
                             <div class="blog__item__text">
                                 <span><i class="far fa-calendar"></i> {{ date("d-m-Y",strtotime($blog->created_at))}}</span>
                                 <h5>{{ $blog->title }}</h5>
