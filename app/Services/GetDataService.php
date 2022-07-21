@@ -26,7 +26,23 @@ class GetDataService
             $response = Http::get("$this->api_url/$type");
             if($response->successful())
             {
-                $data = json_decode($response->getBody()->getContents()); // type = categories ? colors ? sizes...
+                $data = json_decode($response->getBody()->getContents());
+                return $data;
+            }
+            else
+                $response->throw();
+        }
+        return null;
+    }
+
+    public function getDataWithParam($endpoint,array $param) : object
+    {
+        if($endpoint)
+        {
+            $response = Http::get("$this->api_url/$endpoint",$param);
+            if($response->successful())
+            {
+                $data = json_decode($response->getBody()->getContents());
                 return $data;
             }
             else

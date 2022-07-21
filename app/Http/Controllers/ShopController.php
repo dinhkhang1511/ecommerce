@@ -57,12 +57,12 @@ class ShopController extends Controller
         $response = Http::get("$this->api_url/getProduct" , ['product_id' => $id]);
         if($response->successful())
         {
-            $data = json_decode($response->getBody()->getContents());
+            $data = $this->respondToData($response);
 
             $response = Http::get("$this->api_url/getRelatedProduct" , ['product_id' => $id]);
             if($response->successful())
             {
-                $relatedProducts = json_decode($response->getBody()->getContents());
+                $relatedProducts = $this->respondToData($response);
             }
             else
                 $relatedProducts = [];

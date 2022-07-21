@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function editProfile()
     {
-        $user = auth()->user();
+        $user = session('user',[]);
         $provinces = Province::all();
         return view('frontend.profile.edit_profile', compact('user', 'provinces'));
     }
@@ -32,14 +32,16 @@ class ProfileController extends Controller
 
     public function editPassword()
     {
-        $user = auth()->user();
+        $user = session('user',[]);
         return view('frontend.profile.edit_password', compact('user'));
     }
 
     public function updatePassword(PasswordUpdateRequest $request)
     {
+        $user = session('user',[]);
+        $user = User::find($user->id);
         $password = Hash::make($request->new_password);
-        auth()->user()->update(['password' => $password]);
+        $user->update(['password' => $password]);
         return success();
     }
 }

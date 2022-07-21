@@ -28,14 +28,14 @@
                             <h5 class="font-medium">{{ $item->name }} - {{ $item->email }}</h5>
                             <p class="m-b-10 text-muted">{{ $item->message }}</p>
                             <div class="comment-footer">
-                                <span class="text-muted pull-right ml-auto">{{ $item->created_at->format('d F, Y') }}</span> 
+                                <span class="text-muted pull-right ml-auto">{{ $item->created_at }}</span>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
             </div>
-            {{ $contacts->links() }}
+            {{-- {{ $contacts->links() }} --}}
         </div>
     </div>
 @endsection

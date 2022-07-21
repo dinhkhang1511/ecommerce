@@ -6,13 +6,16 @@ use App\Models\Tag;
 use App\Models\Blog;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
+use Illuminate\Support\Facades\Http;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::latest()->paginate(10);
-        return view('backend.blog.index', compact('blogs'));
+        $data = GetData()->getDataWithParam('blogs',request()->all());
+        if(!isset($data->blogs))
+            abort(404);
+        return view('backend.blog.index', compact('data'));
     }
 
     public function create()
@@ -23,7 +26,6 @@ class BlogController extends Controller
 
     public function store(BlogStoreRequest $request)
     {
-        return request()->all();
         $blog = Blog::create($request->validated());
         $blog->tags()->attach($request->tags);
         return success('blogs.index');

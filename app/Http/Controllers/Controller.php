@@ -18,4 +18,9 @@ class Controller extends BaseController
     {
         $this->api_url = config('app.api_url');
     }
+
+    public function respondToData($response)
+    {
+        return json_decode($response->getBody()->getContents());
+    }
 }

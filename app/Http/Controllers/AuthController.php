@@ -35,8 +35,8 @@ class AuthController extends Controller
         $response = Http::post("$this->apiUrl/login",$request->all());
         if($response->status() === 200)
         {
-            $payload = json_decode($response->getBody()->getContents());
-            $request->session()->put('access_token',$payload->token);
+            $payload = $this->respondToData($response);
+            $request->cookie('access_token',$payload->token);
             $request->session()->put('user',$payload->data);
             return redirect()->route('home')->with('success','Operation success');
         }

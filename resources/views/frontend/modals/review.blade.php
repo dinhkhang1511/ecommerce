@@ -19,7 +19,7 @@
                 @endif
                 <div class="modal-body">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <input type="hidden" name="user_id" value="{{ $user->id ?? '' }}">
                     <div class="page mb-3">
                         <div class="page__demo">
                             <div class="page__group">

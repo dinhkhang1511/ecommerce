@@ -34,7 +34,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic mb-3">
-                                            <img width="100" src="{{ $item->product->first_image }}" alt="">
+                                            <img width="100" src="{{$api_asset_url . $item->product->first_image }}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>
@@ -46,7 +46,7 @@
                                                 @for ($i = 0; $i < $item->product->rating_star; $i++)
                                                 <i class="fa fa-star"></i>
                                                 @endfor
-                
+
                                                 @for ($i = 5; $i > $item->product->rating_star; $i--)
                                                 <i class="fa fa-star-o"></i>
                                                 @endfor

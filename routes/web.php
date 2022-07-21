@@ -93,6 +93,6 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
 });
 
 Route::get('test', function(){
-
+    dump(session('user'));
 })->name('test');
 

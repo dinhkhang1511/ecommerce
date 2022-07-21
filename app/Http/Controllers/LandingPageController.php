@@ -18,7 +18,7 @@ class LandingPageController extends Controller
         $response = Http::get("$api_url/home");
         if($response->successful())
         {
-            $data = json_decode($response->getBody()->getContents());
+            $data = $this->respondToData($response);
             $bestSellers = $data->bestSellers;
             $newArrivals = $data->newArrivals;
             $hotSales = $data->hotSales;

@@ -93,18 +93,19 @@
                                     @endif
                                 @endauth
                             </div>
-
-                            <div class="header__top__hover my-profile">
-                                <span>My Profile <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                <ul>
-                                    <li>
-                                        <a href="{{ url('edit-profile') }}">Update Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('edit-password') }}">Change Password</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            @if(isset($user) && !empty($user))
+                                <div class="header__top__hover my-profile">
+                                    <span>My Profile <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ url('edit-profile') }}">Update Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('edit-password') }}">Change Password</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
