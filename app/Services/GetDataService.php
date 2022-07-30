@@ -51,5 +51,21 @@ class GetDataService
         return null;
     }
 
+    public function getDataFromId($endpoint,$id) : object
+    {
+        if($endpoint)
+        {
+            $response = Http::get("$this->api_url/$endpoint/$id");
+            if($response->successful())
+            {
+                $data = json_decode($response->getBody()->getContents());
+                return $data;
+            }
+            else
+                $response->throw();
+        }
+        return null;
+    }
+
 
 }

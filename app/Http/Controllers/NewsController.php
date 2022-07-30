@@ -8,14 +8,20 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::latest()->paginate(9);
+        $param = request()->all();
+        $param['limit'] = '6';
+        $data = GetData()->getDataWithParam('blogs',$param);
+        $blogs = $data->blogs;
         return view('frontend.blog.index', compact('blogs'));
     }
-    
-    public function show(Blog $blog)
+
+    public function show($id)
     {
-        $blog->load('tags');
-        $relatedPost = Blog::relatedPost($blog);
+        $data = GetData()->getDataFromId('blogs',$id);
+        $blog = $data->blogs;
+
+        $relatedPost =  GetData()->getDataFromType("blogs/related/$id")->blogs;
+
         return view('frontend.blog.show', compact('blog', 'relatedPost'));
     }
 }

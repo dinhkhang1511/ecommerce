@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $systemSetting = GetData()->getDataFromType('systemSettings')->settings;
         if ($this->app->environment() == 'production') {
             URL::forceScheme('https');
         }
@@ -42,11 +43,11 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             $view->with('cart_amount', $amount);
-            $subCategories = SubCategory::inRandomOrder()->limit(3)->get();
+            $subCategories = GetData()->getDataWithParam('subCategories',['limit' => '3'])->subCategories;
             $view->with('sub_categories_footer', $subCategories);
         });
 
-        view()->composer('layouts.*', function ($view) {
+        view()->composer('layouts.*', function ($view) use($systemSetting) {
             if (session()->has('success')) {
                 $view->with('success', session('success'));
                 session()->forget('success');
@@ -56,11 +57,11 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('error', session('error'));
                 session()->forget('error');
             }
-            $view->with('setting', SystemSetting::all()->first());
+            $view->with('setting', $systemSetting);
         });
 
-        view()->composer('auth.*', function ($view) {
-            $view->with('setting', SystemSetting::all()->first());
+        view()->composer('auth.*', function ($view) use($systemSetting){
+            $view->with('setting', $systemSetting);
         });
 
         view()->composer('*', function($view){

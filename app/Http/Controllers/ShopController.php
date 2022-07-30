@@ -68,7 +68,7 @@ class ShopController extends Controller
                 $relatedProducts = [];
 
             $product = $data->product;
-            $reviews = $data->reviews;
+            $reviews = $data->product->reviews;
             // * Filter data
 
             $sizes = [];

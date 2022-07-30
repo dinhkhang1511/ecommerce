@@ -12,9 +12,10 @@ class WishListController extends Controller
     public function index()
     {
         $user = session('user',[]);
-        if($user)
+        if($user && !empty($user))
         {
-            $wishlist = User::find($user->id)->wishlist;
+            // $wishlist = GetData()->getDataWithParam("users/wishlist",['id' => $user->id])->wishlist;
+            $wishlist = GetData()->getDataFromType("users/wishlist/$user->id")->wishlist;
             return view('frontend.wishlist', compact('wishlist'));
         }
         else

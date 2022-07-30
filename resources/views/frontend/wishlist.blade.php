@@ -43,11 +43,11 @@
                                                 </a>
                                             </h6>
                                             <div class="rating">
-                                                @for ($i = 0; $i < $item->product->rating_star; $i++)
+                                                @for ($i = 0; $i < $item->product->rating; $i++)
                                                 <i class="fa fa-star"></i>
                                                 @endfor
 
-                                                @for ($i = 5; $i > $item->product->rating_star; $i--)
+                                                @for ($i = 5; $i > $item->product->rating; $i--)
                                                 <i class="fa fa-star-o"></i>
                                                 @endfor
                                             </div>

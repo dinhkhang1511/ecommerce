@@ -86,10 +86,10 @@
                 <nav aria-label="...">
                     <ul class="pagination">
                       <li class="page-item {{$page == '1' ? 'disabled' : ''}} ">
-                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page-1}}" tabindex="-1">Previous</a>
+                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}" tabindex="-1">Previous</a>
                       </li>
                       <li class="page-item {{$page == $data->meta->last_page ? 'disabled' : ''}}" >
-                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page+1}}" >Next</a>
+                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
                       </li>
                     </ul>
                   </nav>
