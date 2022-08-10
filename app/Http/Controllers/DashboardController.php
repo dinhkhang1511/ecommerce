@@ -6,6 +6,7 @@ use App\User;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Product;
+use Illuminate\Support\Facades\Cookie;
 
 class DashboardController extends Controller
 {

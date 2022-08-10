@@ -216,8 +216,8 @@
                         <h6>Contact</h6>
                         <ul>
                             <li><a href="{{ route('contact.create') }}">Contact Us</a></li>
-                            <li><a href="tel:0932042076">0932042076</a></li>
-                            <li><a href="mailto:thanhphu2410@gmail.com">thanhphu2410@gmail.com</a></li>
+                            <li><a href="tel:0932177045">0932177045</a></li>
+                            <li><a href="mailto:dinhkhang1511@gmail.com">dinhkhang1511@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>

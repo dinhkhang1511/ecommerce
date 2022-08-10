@@ -287,7 +287,7 @@
             </div>
         @endif
     </section>
-    @if ($album)
+    {{-- @if (isset($album) && $album)
         <section class="instagram spad">
             <div class="container">
                 <div class="row">
@@ -314,7 +314,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
     @if (count($blogs) > 0)
     <section class="latest spad">
         <div class="container">

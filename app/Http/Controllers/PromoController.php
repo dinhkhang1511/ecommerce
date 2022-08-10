@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Promo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 class PromoController extends Controller
 {
     public function index()
     {
-        $promos = Promo::latest()->paginate(10);
-        return view('backend.promo.index', compact('promos'));
+        $data = GetData()->getDataWithParam('promos', request()->all());
+        $promos = $data->promos;
+        return view('backend.promo.index', compact('promos', 'data'));
     }
 
     public function create()
@@ -18,27 +21,44 @@ class PromoController extends Controller
         return view('backend.promo.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $promo = Promo::create(request()->all());
-        $promo->update(['code' => str_pad($promo->id, 10, Str::random(100))]);
+        $data = $request->all();
+        $token = Cookie::get('access_token');
+        $headers = ['access_token' => $token];
+
+        $payload =  HttpService()->postDataWithBody('promos', $data, $headers);
+        if($payload->status == 402)
+            return back()->with('errors', $payload->errors);
+
         return success('promos.index');
     }
 
-    public function edit(Promo $promo)
+    public function edit($id)
     {
+        $promo = GetData()->getDataFromId('promos', $id)->promos;
+
         return view('backend.promo.edit', compact('promo'));
     }
 
-    public function update(Promo $promo)
+    public function update($id)
     {
-        $promo->update(request()->all());
+        $data = request()->all();
+        $token = Cookie::get('access_token');
+        $headers = ['access_token' => $token];
+        $payload = HttpService()->updateDataWithBody('promos', $id, $data, $headers);
+        if($payload->status == 402)
+            return back()->with('errors', $payload->errors);
+
         return success('promos.index');
     }
 
-    public function destroy(Promo $promo)
+    public function destroy($id)
     {
-        $promo->delete();
+        $token = Cookie::get('access_token');
+        $headers = ['access_token' => $token];
+
+        $promo = HttpService()->deletedData('promos', $id, [], $headers);
         return success('promos.index');
     }
 }

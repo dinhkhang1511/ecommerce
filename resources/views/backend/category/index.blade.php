@@ -1,5 +1,8 @@
 @extends('layouts.backend.app')
 @section('content')
+@php
+ $page = $data->meta->current_page;
+@endphp
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h4 class="text-themecolor">Categories</h4>
@@ -35,23 +38,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($data->categories as $category)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                   <img src="{{ $category->image_path }}" width="100" height="100" class="of-cover">
+                                   <img src="{{$api_asset_url .  ($category->image_path ?? 'uploads/no-image-found.jpg' )}}" width="100" height="100" class="of-cover">
                                 </td>
                                 <td>
-                                    <a href="{{ route('categories.edit', ['category' => $category->id ]) }}" 
-                                        data-toggle="tooltip" data-original-title="Edit"> 
-                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    <a href="{{ route('categories.edit', ['category' => $category->id ]) }}"
+                                        data-toggle="tooltip" data-original-title="Edit">
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i>
                                     </a>
                                     <form action="{{ route('categories.destroy', ['category' => $category->id ]) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete"> 
-                                            <i class="fa fa-close text-danger"></i> 
+                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete">
+                                            <i class="fa fa-close text-danger"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -60,7 +63,16 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $categories->links() }}
+                <nav aria-label="...">
+                    <ul class="pagination">
+                      <li class="page-item {{$page == '1' ? 'disabled' : ''}} ">
+                        <a class="page-link" href="{{route('categories.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}" tabindex="-1">Previous</a>
+                      </li>
+                      <li class="page-item {{$page == $data->meta->last_page ? 'disabled' : ''}}" >
+                        <a class="page-link" href="{{route('categories.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
+                      </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

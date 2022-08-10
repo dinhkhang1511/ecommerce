@@ -2,6 +2,7 @@
 
 use App\Services\CartService;
 use App\Services\GetDataService;
+use App\Services\HttpService;
 use Illuminate\Support\Facades\File;
 
 if (! function_exists('success')) {
@@ -49,10 +50,17 @@ if (! function_exists('cart')) {
         return new CartService();
     }
 
-    if (! function_exists('getData')) {
-        function getData()
-        {
-            return new GetDataService();
-        }
+if (! function_exists('getData')) {
+    function getData()
+    {
+        return new GetDataService();
     }
+}
+
+if (! function_exists('HttpService')) {
+    function HttpService()
+    {
+        return new HttpService();
+    }
+}
 }

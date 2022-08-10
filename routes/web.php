@@ -1,6 +1,8 @@
 <?php
 
+use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +95,7 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
 });
 
 Route::get('test', function(){
-    dump(session('user'));
+
 })->name('test');
+
 

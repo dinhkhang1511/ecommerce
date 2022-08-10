@@ -43,8 +43,8 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             $view->with('cart_amount', $amount);
-            $subCategories = GetData()->getDataWithParam('subCategories',['limit' => '3'])->subCategories;
-            $view->with('sub_categories_footer', $subCategories);
+            $categories = GetData()->getDataWithParam('categories',['limit' => '3'])->categories;
+            $view->with('sub_categories_footer', $categories);
         });
 
         view()->composer('layouts.*', function ($view) use($systemSetting) {

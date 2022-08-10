@@ -92,7 +92,7 @@
                         <a class="page-link" href="{{route('blogs.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
                       </li>
                     </ul>
-                  </nav>
+                </nav>
             </div>
         </div>
     </div>

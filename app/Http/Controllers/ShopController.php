@@ -27,28 +27,11 @@ class ShopController extends Controller
     {
         $products = getData()->getDataFromType('filter');
         $products = collect($products);
-        $categories = getData()->getDataFromType('categories')->categories;
-        $subCategories = getData()->getDataFromType('subCategories')->subCategories;
+        $categories = getData()->getDataWithParam('categories',['limit' => 3 ,'parent' => 1])->categories;
+        $subCategories = getData()->getDataWithParam('categories',['parent' => 0])->categories;
         $sizes = getData()->getDataFromType('sizes')->sizes;
         $colors = getData()->getDataFromType('colors')->colors;
 
-
-        // $categories = Cache::remember('categories', now()->addMinutes(10), function () {
-        //     return Category::all();
-        // });
-        // $subCategories = Cache::remember('subCategories', now()->addMinutes(10), function () {
-        //     return SubCategory::all();
-        // });
-        // $sizes = Cache::remember('sizes', now()->addMinutes(10), function () {
-        //     return Size::all();
-        // });
-        // $colors = Cache::remember('colors', now()->addMinutes(10), function () {
-        //     return Color::all();
-        // });
-        // $categories = Category::all();
-        // $subCategories = SubCategory::all();
-        // $sizes = Size::all();
-        // $colors = Color::all();
         return view('frontend.shop.index', compact('products', 'categories', 'sizes', 'subCategories', 'colors'));
     }
 
@@ -65,7 +48,9 @@ class ShopController extends Controller
                 $relatedProducts = $this->respondToData($response);
             }
             else
+            {
                 $relatedProducts = [];
+            }
 
             $product = $data->product;
             $reviews = $data->product->reviews;

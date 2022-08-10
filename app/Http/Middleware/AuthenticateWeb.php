@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
 class AuthenticateWeb
@@ -17,9 +18,9 @@ class AuthenticateWeb
     public function handle($request, Closure $next)
     {
         $user = session('user');
-        $token = cookie('access_token');
+        $token = Cookie::get('access_token');
         $api_url = config('app.api_url');
-        if($token)
+        if(! is_null($token))
         {
             if($user)
                 return $next($request);
@@ -30,11 +31,12 @@ class AuthenticateWeb
                 {
                     $user = json_decode($response->getBody()->getContents());
                     $request->session()->put('user',$user);
+                    return $next($request);
                 }
                 else
                     return error('login','Invalid User');
             }
         }
-        return redirect()->route('login');
+        return error('login','Invalid User');
     }
 }

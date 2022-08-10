@@ -24,16 +24,16 @@
                         @csrf
                         <div class="form-group">
                             <label>Color Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" 
+                            <input type="text" class="form-control" placeholder="Enter Name"
                             name="name" value="{{ $color->name }}" autocomplete="off">
-                            @error('name') 
+                            @error('name')
                                 <div class="error">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Choose Color</label>
-                            <input type="color" class="form-control" name="code" value="{{ $color->code }}" >
-                            @error('code') 
+                            <input type="color" style= "width:500px, radius:50%" class="form-control" name="code" value="{{ $color->code }}" >
+                            @error('code')
                                 <div class="error">{{ $message }}</div>
                             @enderror
                         </div>

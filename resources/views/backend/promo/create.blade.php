@@ -1,5 +1,6 @@
 @extends('layouts.backend.app')
 @section('content')
+@php $errors = session('errors', []);@endphp
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h4 class="text-themecolor">Promos</h4>
@@ -25,11 +26,30 @@
                             <label>Promo Discount (%)</label>
                             <input type="number" class="form-control" placeholder="Enter Discount" required
                             name="discount" value="{{ old('discount', 0) }}" autocomplete="off">
+                            @if(isset($errors->discount))
+                                @foreach($errors->discount as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
                         </div>
-
+                        <div class="form-group">
+                            <label>Promo Code</label>
+                            <input type="text" class="form-control" placeholder="Enter Code" required
+                            name="code" value="{{ old('code', '')}}" maxlength="10" size="10">
+                            @if(isset($errors->code))
+                                @foreach($errors->code as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label>Promo Description</label>
                             <textarea class="form-control" name="description" rows="3" required>{{ old('description') }}</textarea>
+                            @if(isset($errors->description))
+                                @foreach($errors->description as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
                         </div>
 
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

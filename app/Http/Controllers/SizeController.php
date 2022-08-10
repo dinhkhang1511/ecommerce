@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use App\Services\ImageServices;
+use Illuminate\Support\Facades\Cookie;
 
 class SizeController extends Controller
 {
     public function index()
     {
-        $sizes = Size::latest()->paginate(10);
-        return view('backend.size.index', compact('sizes'));
+        $data = getData()->getDataWithParam('sizes',request()->all());
+        $sizes = $data->sizes;
+        return view('backend.size.index', compact('data','sizes'));
     }
 
     public function create()
@@ -25,22 +27,34 @@ class SizeController extends Controller
         return success('sizes.index');
     }
 
-    public function edit(Size $size)
+    public function edit($id)
     {
+        $size = getData()->getDataFromId('sizes',$id)->sizes;
         return view('backend.size.edit', compact('size'));
     }
 
-    public function update(Size $size)
+    public function update($id)
     {
         $data = request()->validate(['name' => 'required']);
-        $size->update($data);
+        $token = Cookie::get('access_token');
+        $headers = ['access_token' => $token];
+
+        $payload =  HttpService()->updateDataWithBody('sizes', $id, $data, $headers);
+        if($payload->status == 402)
+            return back()->with('errors', $payload->errors);
+
         return success('sizes.index');
     }
 
-    public function destroy(Size $size)
+    public function destroy($id)
     {
-        ImageServices::deleteImages($size);
-        $size->delete();
+        $token = Cookie::get('access_token');
+        $headers = ['access_token' => $token];
+
+        $payload =  HttpService()->deletedData('sizes', $id, [], $headers);
+        if($payload->status == 402)
+            return back()->with('errors', $payload->errors);
+
         return success('sizes.index');
     }
 }

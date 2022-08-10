@@ -94,9 +94,7 @@ class User extends Authenticatable
     public function scopeCustomer($query)
     {
         return $query->whereNotIn('id', function ($item) {
-            $item->select('id')
-                ->from('role_user')
-                ->get();
+            $item->select('role_id');
         });
     }
 }

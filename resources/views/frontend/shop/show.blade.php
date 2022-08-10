@@ -134,8 +134,11 @@
                                 <ul>
                                     <li id="in_stock"><span>In stock:</span>
                                         {{ $product->attributes[0]->product_quantity }}</li>
-                                    <li><span>Category:</span> {{ $product->sub_category->category->name }}</li>
-                                    <li><span>Sub Category:</span> {{ $product->sub_category->name }}</li>
+                                    @if($product->category->parent)
+                                        <li><span>Category:</span> {{ $product->category->parent->name }} > {{$product->category->name}}</li>
+                                    @else
+                                    <li><span>Category:</span> {{ $product->category->name }}</li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
