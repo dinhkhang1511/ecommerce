@@ -1,5 +1,6 @@
 @extends('layouts.backend.app')
 @section('content')
+@php $errors = session('errors', []); @endphp
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h4 class="text-themecolor">Tags</h4>
@@ -24,9 +25,11 @@
                         <div class="form-group">
                             <label>Tag Name</label>
                             <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{ old('name') }}" autocomplete="off">
-                            @error('name') 
-                                <div class="error">{{ $message }}</div>
-                            @enderror
+                            @if(isset($errors->name))
+                                @foreach($errors->name as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </form>

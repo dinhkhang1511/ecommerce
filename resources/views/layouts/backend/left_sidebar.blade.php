@@ -36,8 +36,8 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ route('categories.index') }}">All Categories</a></li>
                         <li><a href="{{ route('categories.create') }}">New Category</a></li>
-                        <li><a href="{{ route('sub-categories.index') }}">All Sub Categories</a></li>
-                        <li><a href="{{ route('sub-categories.create') }}">New Sub Category</a></li>
+                        {{-- <li><a href="{{ route('sub-categories.index') }}">All Sub Categories</a></li>
+                        <li><a href="{{ route('sub-categories.create') }}">New Sub Category</a></li> --}}
                     </ul>
                 </li>
                 <li>

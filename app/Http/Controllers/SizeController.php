@@ -40,7 +40,7 @@ class SizeController extends Controller
         $headers = ['access_token' => $token];
 
         $payload =  HttpService()->updateDataWithBody('sizes', $id, $data, $headers);
-        if($payload->status == 402)
+        if(isset($payload->status) && $payload->status == 402)
             return back()->with('errors', $payload->errors);
 
         return success('sizes.index');

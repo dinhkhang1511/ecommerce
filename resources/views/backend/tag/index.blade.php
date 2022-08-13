@@ -1,5 +1,8 @@
 @extends('layouts.backend.app')
 @section('content')
+@php
+ $page = $data->meta->current_page;
+@endphp
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h4 class="text-themecolor">Tags</h4>
@@ -34,15 +37,15 @@
                             <tr>
                                 <td>{{ $tag->name }}</td>
                                 <td>
-                                    <a href="{{ route('tags.edit', ['tag' => $tag->id ]) }}" 
-                                        data-toggle="tooltip" data-original-title="Edit"> 
-                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    <a href="{{ route('tags.edit', ['tag' => $tag->id ]) }}"
+                                        data-toggle="tooltip" data-original-title="Edit">
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i>
                                     </a>
                                     <form action="{{ route('tags.destroy', ['tag' => $tag->id ]) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete"> 
-                                            <i class="fa fa-close text-danger"></i> 
+                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete">
+                                            <i class="fa fa-close text-danger"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -51,7 +54,16 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $tags->links() }}
+                <nav aria-label="...">
+                    <ul class="pagination">
+                      <li class="page-item {{$page == '1' ? 'disabled' : ''}} ">
+                        <a class="page-link" href="{{route('tags.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}" tabindex="-1">Previous</a>
+                      </li>
+                      <li class="page-item {{$page == $data->meta->last_page ? 'disabled' : ''}}" >
+                        <a class="page-link" href="{{route('tags.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
+                      </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

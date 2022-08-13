@@ -26,7 +26,7 @@ class AuthenticateWeb
                 return $next($request);
             else
             {
-                $response = Http::post("$api_url/authenticate",['access_token' => $token]);
+                $response = Http::post("$api_url/authenticate", ['access_token' => $token]);
                 if($response->successful())
                 {
                     $user = json_decode($response->getBody()->getContents());
@@ -37,6 +37,6 @@ class AuthenticateWeb
                     return error('login','Invalid User');
             }
         }
-        return error('login','Invalid User');
+        return redirect('login');
     }
 }
