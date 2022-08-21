@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\PasswordUpdateRequest;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ProfileController extends Controller
 {
     public function editProfile()
     {
         $user = session('user',[]);
-        $provinces = Province::all();
+        $provinces = getData()->getDataFromType('locations/provinces')->data;
         return view('frontend.profile.edit_profile', compact('user', 'provinces'));
     }
 
@@ -36,12 +38,14 @@ class ProfileController extends Controller
         return view('frontend.profile.edit_password', compact('user'));
     }
 
-    public function updatePassword(PasswordUpdateRequest $request)
+    public function updatePassword(Request $request)
     {
         $user = session('user',[]);
-        $user = User::find($user->id);
-        $password = Hash::make($request->new_password);
-        $user->update(['password' => $password]);
+        $headers = ['access_token' => Cookie::get('access_token')];
+        $response = HttpService()->postDataWithBody('update-password',$request->all(),$headers);
+        if(($response->status) == 402)
+            return back()->with('errors', $response->errors);
+
         return success();
     }
 }

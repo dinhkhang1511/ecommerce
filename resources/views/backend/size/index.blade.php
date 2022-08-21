@@ -44,7 +44,7 @@
                                     <form action="{{ route('sizes.destroy', ['size' => $size->id ]) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete">
+                                        <button class="btn-none" onclick="return confirm('Are you really want to delete')" type="submit" data-toggle="tooltip" data-original-title="Delete">
                                             <i class="fa fa-close text-danger"></i>
                                         </button>
                                     </form>

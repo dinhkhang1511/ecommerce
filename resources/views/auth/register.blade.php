@@ -24,7 +24,7 @@
                             </button>
                         </div>
                     @endif
-                    <form action="{{ route('register') }}" class="form-horizontal form-material" id="loginform"
+                    <form action="{{ route('registered') }}" class="form-horizontal form-material" id="loginform"
                         method="POST">
                         @csrf
                         <h3 class="box-title m-b-20">Sign Up</h3>
@@ -46,7 +46,13 @@
                                     name="password" autocomplete="off">
                             </div>
                         </div>
-                        <di class="form-group row">
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" required="" placeholder="Confirmation Password"
+                                    name="password-confirm" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -55,7 +61,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </di>
+                        </div>
                         <div class="form-group text-center p-b-20">
                             <div class="col-xs-12">
                                 <button

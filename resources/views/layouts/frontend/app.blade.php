@@ -42,7 +42,7 @@
             <div class="offcanvas__links">
                 @if($user)
                     <a href="/logout">Log out</a>
-                    @if (in_array('Admin',$user->roles))
+                    @if (strcmp('Admin',$user->roles) == 0)
                         <a href="/dashboard">Dashboard</a>
                     @endif
                 @else
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="offcanvas__nav__option">
-            <a href="#" class="search-switch">
+            <a href="{{route('shop')}}" class="search-switch">
                 <i class="fa fa-search"></i>
             </a>
             <a href="{{ route('wishlist.index') }}">
@@ -88,7 +88,7 @@
                                     <a href="{{ route('register') }}">Register</a>
                                 @else
                                     <a href="/logout">Log out</a>
-                                    @if (in_array('Admin',$user->roles))
+                                    @if (strcmp('Admin',$user->roles) == 0)
                                         <a href="/dashboard">Dashboard</a>
                                     @endif
                                 @endauth
@@ -155,7 +155,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch">
+                        <a href="{{route('shop')}}" class="search-switch-new">
                             <i class="fa fa-search"></i>
                         </a>
                         <a href="{{ route('wishlist.index') }}">
@@ -263,7 +263,7 @@
         </symbol>
     </svg>
 
-    @isset($success)
+    @if(isset($success) || $success = session('success'))
         <script>
             $("#liveToastSuccess").show();
             $("#liveToastSuccess").delay(1500).slideUp(200, function() {
@@ -271,9 +271,9 @@
             });
 
         </script>
-    @endisset
+    @endif
 
-    @isset($error)
+    @if(isset($error) || $error = session('error'))
         <script>
             $("#liveToastError").show();
             $("#liveToastError").delay(1500).slideUp(200, function() {
@@ -281,7 +281,7 @@
             });
 
         </script>
-    @endisset
+    @endif
 
     @yield('script')
 </body>

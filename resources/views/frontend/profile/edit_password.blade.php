@@ -1,8 +1,8 @@
 @extends('layouts.frontend.app')
 @section('content')
-@foreach ($errors->all() as $error)
+{{-- @foreach ($errors as $error)
     <li>{{ $error }}</li>
-@endforeach
+@endforeach --}}
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
@@ -18,8 +18,10 @@
                                 <div class="checkout__input">
                                     <p>Current Password <span>*</span></p>
                                     <input type="password" placeholder="Current Password" name="current_password" autocomplete="off">
-                                    @error('current_password') 
+                                    @if($errors->current_password)
+                                        @foreach($errors->current_password as $message)
                                         <div class="error">{{ $message }}</div>
+                                        @endforeach
                                     @enderror
                                 </div>
                             </div>
@@ -28,12 +30,14 @@
                                 <div class="checkout__input">
                                     <p>New Password <span>*</span></p>
                                     <input type="password" placeholder="New Password" name="new_password" autocomplete="off">
-                                    @error('new_password') 
+                                    @if($errors->new_password ?? false)
+                                        @foreach($errors->new_password as $message)
                                         <div class="error">{{ $message }}</div>
+                                        @endforeach
                                     @enderror
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

@@ -8,13 +8,18 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::latest()->paginate(10);
-        return view('backend.order.index', compact('orders'));
+        $params = request()->all();
+        $data = GetData()->getDataWithParam('orders', $params);
+        $orders = $data->orders;
+        // $orders = Order::latest()->paginate(10);
+        return view('backend.order.index', compact('orders','data'));
     }
 
-    public function show(Order $order)
+    public function show($id)
     {
-        $order->load('details');
+        // $order->load('details');
+
+        $order = GetData()->getDataFromId('orders', $id)->orders;
         return view('backend.order.show', compact('order'));
     }
 

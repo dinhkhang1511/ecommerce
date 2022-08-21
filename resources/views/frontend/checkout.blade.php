@@ -21,7 +21,7 @@
             <div class="checkout__form">
                 <form action="{{ route('checkout.store') }}" method="POST" id="checkout-form">
                     @csrf
-                    <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+                    <input type="hidden" value="{{ $user->id ?? null }}" name="user_id">
                     <input type="hidden" value="{{ $total }}" id="old_price">
                     <input type="hidden" value="{{ $total }}" name="price" id="price">
                     <input type="hidden" value="0" name="discount" id="discount">
@@ -156,8 +156,8 @@
                             <div class="cart__discount">
                                 <h6>Discount codes</h6>
                                 <div>
-                                    <input type="text" placeholder="Promos code" id="promos_code">
-                                    <button type="button" id="apply_promos">Apply</button>
+                                    <input type="text" placeholder="Promos code" id="promos_code" {{session()->has('paypal_paid') ? 'disabled' : ''}}>
+                                    <button type="button" id="apply_promos" {{session()->has('paypal_paid') ? 'disabled' : ''}}>Apply</button>
                                 </div>
                             </div>
                             <div class="checkout__order">
@@ -167,7 +167,7 @@
                                     @foreach ($products as $product)
                                         @foreach ($cart[$product->id] as $index => $item)
                                             @php
-                                                $attribute = $product->firstAttribute($item);
+                                                $attribute = $product->attributes[$index];
                                             @endphp
 
                                             <input type="hidden" name="size_id[]" value="{{ $item['size'] }}">
@@ -192,7 +192,7 @@
                                     <li>Discount <span id="order_discount">0%</span></li>
                                     <li>Total <span id="order_total">{{ money($total) }}</span></li>
                                 </ul>
-                                @if (!session()->has('paypal_paid') && $products->count() > 0)
+                                @if (!session()->has('paypal_paid') && count($products) > 0)
                                     <p><b>PAYMENT METHODS</b></p>
                                     <div class="mb-3">
                                         <div class="custom-control custom-radio">
@@ -241,7 +241,7 @@
                                 @elseif(session()->has('paypal_paid'))
                                     <p><b>You're paid by PAYPAL</b></p>
                                 @endif
-                                @if ($products->count() > 0)
+                                @if (count($products) > 0)
                                     <button type="submit" class="site-btn" id="site-btn">
                                         PLACE ORDER
                                     </button>

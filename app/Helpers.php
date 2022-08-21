@@ -9,6 +9,8 @@ if (! function_exists('success')) {
     function success($nameRoute = 'home', $message = 'Operation successful')
     {
         session()->put('success', $message);
+        if($nameRoute == 'logout')
+            return redirect('logout');
         return redirect()->route($nameRoute);
     }
 }
@@ -17,6 +19,8 @@ if (! function_exists('error')) {
     function error($nameRoute = 'home', $message = 'Operation failed')
     {
         session()->put('error', $message);
+        if($nameRoute == 'logout')
+            return redirect('logout');
         return redirect()->route($nameRoute);
     }
 }

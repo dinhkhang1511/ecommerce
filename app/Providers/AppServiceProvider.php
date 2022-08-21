@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\SystemSetting;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -73,11 +74,14 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('backend.setting.*', function ($view) {
-            $view->with('setting', SystemSetting::all()->first());
+            $settings = getData()->getDataFromType('systemSettings')->settings;
+
+            $view->with('setting', $settings);
         });
 
-        // view()->composer('layouts.backend.app', function ($view) {
-        //     $view->with('current_user', auth()->user()->load('unreadNotifications'));
-        // });
+        view()->composer('layouts.backend.app', function ($view) {
+            $user = getData()->getDataWithParam('getUser',['fields' => 'unreadNotifications'], ['access_token' => Cookie::get('access_token','')]);
+            $view->with('current_user', $user);
+        });
     }
 }

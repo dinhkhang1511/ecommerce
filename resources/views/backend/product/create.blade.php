@@ -39,7 +39,7 @@
 
                             <input type="hidden" value="{{ old('sizes') ? count(old('sizes', [])) : 1 }}"
                                 id="currentAttribute">
-                            <input type="hidden" value="{{ $sizes->count() * $colors->count() }}" id="maxOfAttribute">
+                            <input type="hidden" value="{{ count($sizes) * count($colors) }}" id="maxOfAttribute">
 
                             @if (count(old('sizes', [])) > 0)
                                 <div class="card">
@@ -131,7 +131,7 @@
                                                 <tbody id="attributeWrapper">
                                                     <tr>
                                                         <td>
-                                                            <select class="custom-select" name="sizes[]">
+                                                            <select id="select-sizes" class="custom-select" name="sizes[]">
                                                                 <option selected value="">Sizes</option>
                                                                 @foreach ($sizes as $size)
                                                                     <option value="{{ $size->id }}">
@@ -141,7 +141,7 @@
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="custom-select" name="colors[]">
+                                                            <select id="select-colors"  class="custom-select" name="colors[]">
                                                                 <option selected value="">Colors</option>
                                                                 @foreach ($colors as $color)
                                                                     <option value="{{ $color->id }}">
@@ -190,16 +190,16 @@
 
 
                             <div class="form-group">
-                                <h5 class="m-t-30">Select Sub Category</h5>
-                                <select class="custom-select" name="sub_category_id">
-                                    <option selected value="">Select sub-category</option>
-                                    @foreach ($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}" @if ($subCategory->id == old('sub_category_id')) selected @endif>
-                                            {{ $subCategory->name }}
+                                <h5 class="m-t-30">Select Category</h5>
+                                <select class="custom-select" name="category_id">
+                                    <option selected value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>
+                                            {{ $category->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('sub_category_id')
+                                @error('category_id')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
                             </div>

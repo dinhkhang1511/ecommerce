@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class WishListController extends Controller
 {
@@ -22,15 +24,20 @@ class WishListController extends Controller
             return error();
     }
 
-    public function store(Wishlist $wishlist)
+    public function store(Request $request)
     {
         $user = session('user',[]);
         $user = User::find($user->id);
-        if (!$wishlist->isExists()) {
-            $user->wishlist()->create(['product_id' => request('product_id')]);
-            return success('wishlist.index', 'Added to wishlist');
+        $headers = ['access_token' => Cookie::get('access_token', null)];
+        if($user)
+        {
+            $request['user_id'] = $user->id;
+            $response = HttpService()->postDataWithBody('wishlists', $request->all(), $headers);
         }
-        return error('wishlist.index', 'Already in wishlist');
+        else
+            return redirect('login');
+
+        return success('wishlist.index', $response->data);
     }
 
     public function destroy(Wishlist $wishlist)

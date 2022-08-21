@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Blog;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
 class BlogController extends Controller
@@ -20,39 +21,114 @@ class BlogController extends Controller
 
     public function create()
     {
-        $tags = Tag::all();
+        // $tags = Tag::all();
+        $data = GetData()->getDataWithParam('tags',['limit' => 'all']);
+        $tags = $data->tags ?? [];
         return view('backend.blog.create', compact('tags'));
     }
 
     public function store(BlogStoreRequest $request)
     {
-        $blog = Blog::create($request->validated());
-        $blog->tags()->attach($request->tags);
+        $headers = ['access_token' => Cookie::get('access_token')];
+        $data = $request->validated();
+        $options = [
+            'multipart' => [
+              [
+                'name' => 'title',
+                'contents' => $data['title']
+              ],
+              [
+                'name' => 'body',
+                'contents' => $data['body']
+              ],
+              [
+                'name' => 'image_path',
+                'contents' => file_get_contents($request->file('image_path')->getRealPath(), 'r'),
+                'filename' => 'temp.jpg',
+                'headers'  => [
+                'Content-Type' => '<Content-type header>'
+                ]
+              ],
+            ]
+        ];
+        foreach ($data['tags'] as $key => $value) {
+            $options['multipart'][] = [
+                    'name' => 'tags[]',
+                    'contents' => $data['tags'][$key]
+            ];
+        }
+
+        $response = HttpService()->postDataWithOptions('blogs', $options, $headers);
+
+
+        // $blog = Blog::create($request->validated());
+        // $blog->tags()->attach($request->tags);
+        // return success('blogs.index');
+        if($response->status == 402)
+            return back()->with('errors', $response->errors);
+
         return success('blogs.index');
     }
 
-    public function edit(Blog $blog)
+    public function edit($id)
     {
-        $tags = Tag::all();
-        $blog->load('tags');
+        $data = GetData()->getDataWithParam('tags',['limit' => 'all']);
+        $tags = $data->tags ?? [];
+
+        $data = GetData()->getDataFromId('blogs',$id);
+        $blog = $data->blogs ?? [];
+
         return view('backend.blog.edit', compact('blog', 'tags'));
     }
 
-    public function update(BlogUpdateRequest $request, Blog $blog)
+    public function update(BlogUpdateRequest $request, $id)
     {
-        if (request()->has('image_path')) {
-            delete_file($blog->image_path);
+        $headers = ['access_token' => Cookie::get('access_token')];
+        $data = $request->validated();
+        $options = [
+            'multipart' => [
+              [
+                'name' => 'title',
+                'contents' => $data['title']
+              ],
+              [
+                'name' => 'body',
+                'contents' => $data['body']
+              ],
+            ]
+        ];
+        if($request->hasFile('image_path'))
+        {
+            $options['multipart'][] = [
+                'name' => 'image_path',
+                'contents' => file_get_contents($request->file('image_path')->getRealPath(), 'r'),
+                'filename' => 'temp.jpg',
+                'headers'  => [
+                'Content-Type' => '<Content-type header>'
+                ]
+            ];
         }
 
-        $blog->update($request->validated());
-        $blog->tags()->sync($request->tags);
+        foreach ($data['tags'] as $key => $value) {
+            $options['multipart'][] = [
+                    'name' => 'tags[]',
+                    'contents' => $data['tags'][$key]
+            ];
+        }
+
+        $response = HttpService()->updateDataWithOptions('blogs',$id, $options, $headers);
+
+        if($response->status == 402)
+            return back()->with('errors', $response->errors);
+
         return success('blogs.index');
     }
 
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
-        delete_file($blog->image_path);
-        $blog->delete();
+        $headers = ['access_token' => Cookie::get('access_token')];
+        $resposne = HttpService()->deletedData('blogs', $id, [], $headers);
+
         return success('blogs.index');
     }
 }

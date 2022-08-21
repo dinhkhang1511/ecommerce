@@ -25,10 +25,10 @@ class ShopController extends Controller
 
     public function index()
     {
-        $products = getData()->getDataFromType('filter');
+        $products = getData()->getDataWithParam('filter', request()->all());
         $products = collect($products);
         $categories = getData()->getDataWithParam('categories',['limit' => 3 ,'parent' => 1])->categories;
-        $subCategories = getData()->getDataWithParam('categories',['parent' => 0])->categories;
+        $subCategories = getData()->getDataWithParam('categories',['parent' => 0, 'limit' => 'all'])->categories;
         $sizes = getData()->getDataFromType('sizes')->sizes;
         $colors = getData()->getDataFromType('colors')->colors;
 
@@ -37,7 +37,8 @@ class ShopController extends Controller
 
     public function show($id)
     {
-        $response = Http::get("$this->api_url/getProduct" , ['product_id' => $id]);
+        $user_id = session('user','')->id ?? 0;
+        $response = Http::withHeaders(['user_id' => $user_id])->get("$this->api_url/getProduct" , ['product_id' => $id]);
         if($response->successful())
         {
             $data = $this->respondToData($response);

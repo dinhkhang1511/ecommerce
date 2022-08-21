@@ -7,7 +7,7 @@
                     <h3 class="p-2">{{ $product->name }}</h3>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
-                            <div class="white-box text-center"> <img src="/{{ $product->first_image }}" class="img-responsive">
+                            <div class="white-box text-center"> <img src="{{ $api_asset_url .  $product->first_image }}" class="img-responsive">
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-6">
@@ -43,11 +43,11 @@
                                         </tr>
                                         <tr>
                                             <td>Sizes</td>
-                                            <td>{{ $product->sizes->implode('name', ', ') }}</td>
+                                            <td>{{ implode(', ',collect($product->sizes)->pluck('name')->toArray()) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Colors</td>
-                                            <td>{{ $product->colors->implode('name', ', ') }}</td>
+                                            <td>{{ implode(', ',collect($product->colors)->pluck('name')->toArray()) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Category</td>
@@ -55,11 +55,11 @@
                                         </tr>
                                         <tr>
                                             <td>Sub Category</td>
-                                            <td>{{ $product->subCategory->name }}</td>
+                                            <td>{{ $product->parent_category->name ?? '' }}</td>
                                         </tr>
                                         <tr>
                                             <td>Ordered</td>
-                                            <td>{{ $product->orders->count() }}</td>
+                                            <td>{{ count($product->orders) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Reviews</td>

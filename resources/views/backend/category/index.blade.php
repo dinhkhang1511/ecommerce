@@ -22,7 +22,7 @@
             <div class="card-body">
                 <h4 class="card-title">Categories Table</h4>
                 <div class="table-responsive">
-                    <a href="{{ url('excel/categories') }}">
+                    <a href="{{ $api_url . '/excel/categories' }}">
                         <button type="button" class="btn btn-primary mb-3">EXCEL</button>
                     </a>
                     <div class="form-group">
@@ -53,7 +53,7 @@
                                     <form action="{{ route('categories.destroy', ['category' => $category->id ]) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete">
+                                        <button class="btn-none" onclick="return confirm('Are u really want to delete')" type="submit" data-toggle="tooltip" data-original-title="Delete">
                                             <i class="fa fa-close text-danger"></i>
                                         </button>
                                     </form>

@@ -44,7 +44,7 @@
                                 <p>({{ $month . date('-Y') }})</p>
                             </div>
                             <div class="ml-auto">
-                                <h2 class="counter text-primary">{{ $newCustomers->count() }}</h2>
+                                <h2 class="counter text-primary">{{ count($newCustomers )}}</h2>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                 <p>({{ $month . date('-Y') }})</p>
                             </div>
                             <div class="ml-auto">
-                                <h2 class="counter text-cyan">{{ $newOrders->count() }}</h2>
+                                <h2 class="counter text-cyan">{{ count($newOrders) }}</h2>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                                 <p>({{ $month . date('-Y') }})</p>
                             </div>
                             <div class="ml-auto">
-                                <h2 class="counter text-success">{{ $newReviews->count() }}</h2>
+                                <h2 class="counter text-success">{{ count($newReviews) }}</h2>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                 <div class="card-body bg-light">
                     <div class="row">
                         <div class="col-6">
-                            <h4>Top Selling Product</h4>
+                            <h4>Top Selling Product All Time</h4>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="card-body bg-light">
                     <div class="row">
                         <div class="col-6">
-                            <h4>Top Favorite Product</h4>
+                            <h4>Top Favorite Product All Time</h4>
                         </div>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($newCustomers->take(8) as $item)
+                            @foreach ($newCustomers as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->index + 1 }}</td>
                                     <td class="txt-oflo">{{ $item->name }}</td>
@@ -311,12 +311,12 @@
                     <h5 class="card-title">Recent Reviews</h5>
                 </div>
                 <div class="comment-widgets">
-                    @foreach ($newReviews->take(8) as $item)
-                        <a href="{{ route('product-details', ['product' => $item->product->id]) }}">
+                    @foreach ($newReviews as $item)
+                        <a href="{{ route('product-details', ['product' => $item->product_id]) }}">
                             <div class="d-flex no-block comment-row">
                                 <div class="p-2">
                                     <span class="round">
-                                        <img src="/{{ $item->user->avatar }}" alt="user" width="50" height="50">
+                                        <img src="{{$api_asset_url . $item->user->avatar }}" alt="user" width="50" height="50">
                                     </span>
                                 </div>
                                 <div class="comment-text w-100">
@@ -324,7 +324,7 @@
                                     <p class="m-b-10 text-muted">{{ $item->body }}</p>
                                     <div class="comment-footer">
                                         <span
-                                            class="text-muted pull-right ml-auto">{{ $item->created_at->format('d F, Y') }}</span>
+                                            class="text-muted pull-right ml-auto">{{ $item->created_at }}</span>
                                     </div>
                                 </div>
                             </div>

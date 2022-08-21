@@ -20,7 +20,7 @@ class CheckStaff
         if(session()->has('user'))
         {
             $user = session('user');
-            if ($user && in_array('Admin',$user->roles))
+            if ($user && strcmp('Admin',$user->roles) == 0)
                 return $next($request);
         }
         elseif($token = $request->cookie('access_token'))
@@ -30,7 +30,7 @@ class CheckStaff
                 {
                     $user = json_decode($response->getBody()->getContents());
                     $request->session()->put('user',$user);
-                    if ($user && in_array('Admin',$user->roles))
+                    if ($user && strcmp('Admin',$user->roles) == 0)
                         return $next($request);
                 }
                 else

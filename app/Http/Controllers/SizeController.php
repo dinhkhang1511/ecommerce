@@ -22,8 +22,9 @@ class SizeController extends Controller
 
     public function store()
     {
+        $headers = ['access_token' => Cookie::get('access_token')];
         $data = request()->validate(['name' => 'required']);
-        Size::create($data);
+        $response = HttpService()->postDataWithBody('sizes', $data, $headers);
         return success('sizes.index');
     }
 

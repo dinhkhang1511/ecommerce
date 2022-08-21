@@ -8,17 +8,20 @@ use App\Models\Promo;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\ProductAttribute;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class AjaxController extends Controller
 {
     public function findPromos($code)
     {
-        return Promo::where('code', $code)->first();
+        $promo = GetData()->getDataWithParam('find-promo', ['code' => $code], []);
+        return response()->json($promo);
     }
 
     public function getColor($product, $size)
     {
-        //loại bỏ color trùng id để sửa lỗi hiện thị color trùng
+        // loại bỏ color trùng id để sửa lỗi hiện thị color trùng
         $attributes = ProductAttribute::where('product_quantity', '>', 0)
                     ->where('product_id', $product)
                     ->where('size_id', $size)
@@ -27,6 +30,9 @@ class AjaxController extends Controller
 
         $attributes->load('color');
         return $attributes;
+
+        // $attributes = GetData()->getDataFromType("get-colors/$product/$size");
+        // return $attributes;
     }
 
     public function getAttribute()
@@ -37,16 +43,16 @@ class AjaxController extends Controller
                     ->first();
     }
 
-    public function getDistrict(Province $province)
+    public function getDistrict($id)
     {
-        $province->load('districts');
-        return response()->json($province->districts);
+        $data = GetData()->getDataFromType("districts/$id");
+        return $data;
     }
 
-    public function getWards(District $district)
+    public function getWards($id)
     {
-        $district->load('wards');
-        return response()->json($district->wards);
+        $data = GetData()->getDataFromType("wards/$id");
+        return $data;
     }
 
     public function getAllAttributes()
@@ -63,5 +69,16 @@ class AjaxController extends Controller
         //dùng để check là user đã thanh toán qua paypal rồi
         session()->put('paypal_paid', true);
         return true;
+    }
+
+    public function updateOrder(Request $request,$id)
+    {
+        $headers = ['access_token' => Cookie::get('access_token')];
+        if($request->has('status'))
+        {
+            $response = HttpService()->updateDataWithBody('orders', $id, ['status' => $request->status], $headers);
+            return response()->json($response);
+        }
+        return;
     }
 }

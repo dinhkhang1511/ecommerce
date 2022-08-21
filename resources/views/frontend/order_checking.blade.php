@@ -14,9 +14,9 @@
                                         <p>Order No <span>*</span></p>
                                         <input type="text" name="order_no" placeholder="Order No"
                                             value="{{ old('order_no') }}" autocomplete="off">
-                                        @error('order_no') 
-                                            <div class="error">{{ $message }}</div>
-                                        @enderror
+                                        @if($error = session('error'))
+                                            <div class="error">{{ $error }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                     <td>{{ $order->order_no }}</td>
                                     <td>
                                         <button type="submit" class="site-btn mt-3 mb-5" data-toggle="modal" data-target="#modelId">VIEW</button>
-                                        
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -86,7 +86,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $order->created_at }}</td>
                                     <td>{{ money($order->price) }}</td>
                                     <td>
                                         <span class="status {{ $order->status_color }}">{{ $order->status }}</span>

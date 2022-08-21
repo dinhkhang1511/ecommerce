@@ -50,12 +50,12 @@
                             </form>
                         </li>
                     </ul>
-                    {{-- <ul class="navbar-nav my-lg-0">
+                    <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-bell"></i>
-                                @if ($current_user->unreadNotifications->count() > 0)
+                                @if (count($current_user->unread_notifications) > 0)
                                 <div class="notify">
                                     <span class="heartbit"></span>
                                     <span class="point"></span>
@@ -70,15 +70,15 @@
                                     </li>
                                     <li>
                                         <div class="message-center">
-                                            @foreach ($current_user->unreadNotifications as $item)
-                                            <a href="{{ $item->data['url'] }}?notification={{ $item->id }}">
+                                            @foreach ($current_user->unread_notifications as $item)
+                                            <a href="{{ $item->data->url }}?notification={{ $item->id }}">
                                                 <div class="btn btn-danger btn-circle">
-                                                    <i class="{{ $item->data['icon'] ?? 'fas fa-wallet' }}"></i>
+                                                    <i class="{{ $item->data->icon ?? 'fas fa-wallet' }}"></i>
                                                 </div>
                                                 <div class="mail-contnet">
-                                                    <h5>{{ $item->data['title'] }}</h5>
-                                                    <span class="mail-desc">{{ $item->data['body'] }}</span>
-                                                    <span class="time">{{ $item->created_at->format('d-m H:i') }}</span>
+                                                    <h5>{{ $item->data->title }}</h5>
+                                                    <span class="mail-desc">{{ $item->data->body }}</span>
+                                                    <span class="time">{{ date('d-m H:i', strtotime($item->created_at))}}</span>
                                                 </div>
                                             </a>
                                             @endforeach
@@ -86,7 +86,7 @@
                                     </li>
                                     <li>
                                         <a class="nav-link text-center link"
-                                        href="{{ $current_user->unreadNotifications->count() > 0 ? route('mark-all-as-read') : '#'}}">
+                                        href="{{ count($current_user->unread_notifications) > 0 ? route('mark-all-as-read') : '#'}}">
                                             <strong>Mark all notifications as read</strong> <i class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
@@ -110,9 +110,9 @@
                                 <a href="javascript:void(0)" class="dropdown-item">
                                     <i class="ti-wallet"></i> My balance
                                 </a>
-                                <a href="{{ route('send-email.create') }}" class="dropdown-item">
+                                {{-- <a href="{{ route('send-email.create') }}" class="dropdown-item">
                                     <i class="ti-email"></i> Inbox
-                                </a>
+                                </a> --}}
                                 <a href="{{ url('logout') }}" class="dropdown-item">
                                     <i class="fa fa-power-off"></i> Logout
                                 </a>
@@ -124,7 +124,7 @@
                                 <i class="ti-settings"></i>
                             </a>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </div>
             </nav>
         </header>

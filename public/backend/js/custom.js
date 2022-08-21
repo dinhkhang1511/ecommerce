@@ -63,44 +63,18 @@ $("#addAttribute").on("click", function(e) {
     e.preventDefault();
     var maxOfAttribute = parseInt($("#maxOfAttribute").val());
     var currentAttribute = parseInt($("#currentAttribute").val());
-    $.ajax({
-        url: "/products/attributes",
-        type: "get",
-        success: function(data) {
-            var sizes = "";
-            data.sizes.forEach(function(item) {
-                sizes +=
-                    '<option value="' +
-                    item.id +
-                    '">' +
-                    item.name +
-                    "</option>";
-            });
+    var sizes = document.getElementById('select-sizes');
+    var colors = document.getElementById('select-colors');
 
-            var colors = "";
-            data.colors.forEach(function(item) {
-                colors +=
-                    '<option value="' +
-                    item.id +
-                    '">' +
-                    item.name +
-                    "</option>";
-            });
 
             if (currentAttribute + 1 <= maxOfAttribute) {
                 $("#attributeWrapper").append(
                     "<tr>" +
                         "<td>" +
-                        '<select class="custom-select" name="sizes[]">' +
-                        '<option selected value="">Sizes</option>' +
-                        sizes +
-                        "</select>" +
+                        sizes.outerHTML +
                         "</td>" +
                         "<td>" +
-                        '<select class="custom-select" name="colors[]">' +
-                        '<option selected value="">Colors</option>' +
-                        colors +
-                        "</select>" +
+                        colors.outerHTML +
                         "</td>" +
                         "<td>" +
                         '<input type="number" class="form-control"' +
@@ -125,9 +99,7 @@ $("#addAttribute").on("click", function(e) {
                 );
                 $("#currentAttribute").val(currentAttribute + 1);
             }
-        }
     });
-});
 
 $("#files").on("change", function() {
     $("#files ~ .custom-file-label").text(
@@ -151,14 +123,19 @@ $("#order_status").on("change", function() {
         }
     });
     $.ajax({
-        url: "/orders/" + order_id,
+        url: "/updateOrder/" + order_id,
         type: "patch",
         data: {
             status: $(this).val()
         },
         success: function(data) {
             // console.log(data);
-        }
+        },
+        statusCode: {
+            401: function() {
+                window.location.replace("/logout");
+            }
+          }
     });
 });
 

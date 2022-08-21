@@ -4,6 +4,7 @@ namespace App\Services;
 
 use ArrayObject;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -49,7 +50,7 @@ class HttpService
             return $payload;
         }
         elseif( $response->status() == 401)
-            return error('login','Unauthorized');
+            return json_decode($response->getBody()->getContents());
         else
             $response->throw();
 
@@ -81,10 +82,31 @@ class HttpService
         {
             $data = json_decode($response->getBody()->getContents());
             return $data;
+        }elseif($response->status() == 401)
+        {
+            return error('logout');
         }
         else
            return $response->throw();
 
+    }
+
+    public function updateDataWithOptions($endpoint, $id, $options, $headers = [])
+    {
+        $client = new Client();
+        $request = new Request('POST', "$this->api_url/$endpoint/$id", $headers);
+        $response = $client->sendAsync($request, $options)->wait();
+        $payload = json_decode($response->getBody()->getContents());
+        return $payload;
+    }
+
+    public function postDataWithOptions($endpoint, $options, $headers = [])
+    {
+        $client = new Client();
+        $request = new Request('POST', "$this->api_url/$endpoint", $headers);
+        $response = $client->sendAsync($request, $options)->wait();
+        $payload = json_decode($response->getBody()->getContents());
+        return $payload;
     }
 
 

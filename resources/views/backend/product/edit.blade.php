@@ -32,8 +32,8 @@
                                 @enderror
                             </div>
 
-                            <input type="hidden" value="{{ $product->allattributes->count() }}" id="currentAttribute">
-                            <input type="hidden" value="{{ $sizes->count() * $colors->count() }}" id="maxOfAttribute">
+                            <input type="hidden" value="{{ count($product->allattributes) }}" id="currentAttribute">
+                            <input type="hidden" value="{{ count($sizes) * count($colors) }}" id="maxOfAttribute">
 
                             <div class="card">
                                 <div class="card-body p-0">
@@ -120,16 +120,16 @@
                             @enderror
 
                             <div class="form-group">
-                                <h5 class="m-t-30">Select Sub Category</h5>
-                                <select class="custom-select" name="sub_category_id">
-                                    <option selected value="">Select sub-category</option>
-                                    @foreach ($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}" @if (old('sub_category_id', $product->subcategory->id) == $subCategory->id) selected @endif>
-                                            {{ $subCategory->name }}
+                                <h5 class="m-t-30">Select Category</h5>
+                                <select class="custom-select" name="category_id">
+                                    <option selected value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" @if (old('category_id', $product->category->id) == $category->id) selected @endif>
+                                            {{ $category->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('sub_category_id')
+                                @error('category_id')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
                             </div>

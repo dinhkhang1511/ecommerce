@@ -4,16 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ $api_asset_url . 'images/favicon.svg' }}">
     <title>{{ $setting->site_title }}</title>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
 </head>
 <body class="skin-default card-no-border">
     <section id="wrapper">
-        <div class="login-register" style="background-image:url({{ asset('images/login-register.jpeg') }});">
+        <div class="login-register" style="background-image:url({{$api_asset_url . 'images/login-register.jpeg' }});">
             <div class="login-box card">
                 <div class="card-body">
+                    @if ($success = session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ $success }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     @if ($errors->first())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ $errors->first() }}
@@ -30,7 +38,7 @@
                             </button>
                         </div>
                     @endif
-                    <form action="{{ route('login') }}" method="POST" class="form-horizontal form-material"
+                    <form action="{{ route('checkLogin') }}" method="POST" class="form-horizontal form-material"
                         id="loginform">
                         @csrf
                         <h3 class="box-title m-b-20">Sign In</h3>

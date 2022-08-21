@@ -26,7 +26,7 @@
                             <label>Blog Title</label>
                             <input type="text" class="form-control" placeholder="Enter Name"
                              name="title" value="{{ old('title', $blog->title) }}" autocomplete="off">
-                            @error('title') 
+                            @error('title')
                                 <div class="error">{{ $message }}</div>
                             @enderror
                         </div>
@@ -36,11 +36,11 @@
                             @foreach ($tags as $tag)
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="tag{{ $tag->id }}" value="{{ $tag->id }}"
-                                    @if($blog->tags->contains('id', $tag->id)) checked @endif  name="tags[]">
+                                    @if(collect($blog->tags)->contains('id', $tag->id)) checked @endif  name="tags[]">
                                     <label class="custom-control-label" for="tag{{ $tag->id }}">{{ $tag->name }}</label>
                                 </div>
                             @endforeach
-                            @error('tags') 
+                            @error('tags')
                                 <div class="error">{{ $message }}</div>
                             @enderror
                         </div>
@@ -58,7 +58,7 @@
                             @endif
                         </div>
                         <textarea id="summernote" name="body">{!! $blog->body !!}</textarea>
-                        @error('body') 
+                        @error('body')
                             <div class="error">{{ $message }}</div>
                         @enderror
                         <button type="submit" class="btn btn-danger mt-3"> <i class="fa fa-pencil"></i> Save</button>

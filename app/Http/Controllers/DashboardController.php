@@ -10,21 +10,20 @@ use Illuminate\Support\Facades\Cookie;
 
 class DashboardController extends Controller
 {
-    public function index(Product $product)
+    public function index()
     {
         $month = request('m', date('m'));
-        $newCustomers = User::whereMonth('created_at', $month)
-            ->whereYear('created_at', date('Y'))
-            ->customer()
-            ->latest()
-            ->get();
+        $newCustomers = getData()->getDataWithParam('users-month',request()->all())->users ?? [];
 
-        $newOrders = Order::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))->latest()->get();
-        $totalIncome = $newOrders->where('status', 'Delivered')->sum('price');
-        $newReviews = Review::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))->latest()->get();
-        $bestSellers = $product->best_seller;
-        $topFavourite = $product->top_favourite;
-        $pendingOrders = Order::where('status', 'pending')->get();
+        $newOrders = getData()->getDataWithParam('orders-month',['m' => $month])->orders ?? [];
+        $totalIncome = collect($newOrders)->where('status', 'Delivered')->sum('price');
+        $newReviews = getData()->getDataWithParam('reviews',['m' => $month, 'limit' => 8])->reviews ?? [];
+        $response = getData()->getDataWithParam('products-filters',['filters' => ['bestSellers', 'topFavourite']]);
+        $products = collect($response->data);
+        $bestSellers = $products['bestSellers'];
+        $topFavourite = $products['topFavourite'];
+        $orders = getData()->getDataWithParam('orders',['limit' => 'all'])->orders ?? [];
+        $pendingOrders = collect($orders)->where('status','Pending');
         return view('backend.index', compact('month', 'newCustomers', 'newOrders', 'totalIncome', 'newReviews', 'bestSellers', 'topFavourite', 'pendingOrders'));
     }
 }

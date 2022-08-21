@@ -1,5 +1,8 @@
 @extends('layouts.backend.app')
 @section('content')
+@php
+ $page = $data->meta->current_page;
+@endphp
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h4 class="text-themecolor">Orders</h4>
@@ -19,7 +22,7 @@
             <div class="card-body">
                 <h4 class="card-title">Orders Table</h4>
                 <div class="table-responsive">
-                    <a href="{{ url('excel/orders') }}">
+                    <a href="{{  $api_url . '/excel/orders'  }}">
                         <button type="button" class="btn btn-primary mb-3">EXCEL</button>
                     </a>
                     <div class="form-group">
@@ -47,8 +50,8 @@
                                 </td>
                                 <td>{{ $order->price }}</td>
                                 <td>
-                                    <a href="{{ route('orders.show', ['order' => $order->id ]) }}" 
-                                        data-toggle="tooltip" data-original-title="View"> 
+                                    <a href="{{ route('orders.show', ['order' => $order->id ]) }}"
+                                        data-toggle="tooltip" data-original-title="View">
                                         <i class="fa fa-eye m-r-15" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -57,7 +60,16 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $orders->links() }}
+                <nav aria-label="...">
+                    <ul class="pagination">
+                      <li class="page-item {{$page == '1' ? 'disabled' : ''}} ">
+                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}" tabindex="-1">Previous</a>
+                      </li>
+                      <li class="page-item {{$page == $data->meta->last_page ? 'disabled' : ''}}" >
+                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
+                      </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

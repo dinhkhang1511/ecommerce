@@ -1,8 +1,14 @@
 <?php
 
+use App\Models\Order;
+use App\Models\Promo;
+use App\Models\SystemSetting;
+use App\Notifications\NewOrder;
+use App\User;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +55,7 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
 
     /* *************Back End************* */
     Route::middleware(['auth.web', 'is_staff', 'mark_as_read'])->group(function () {
+        Route::patch('updateOrder/{id}', 'AjaxController@updateOrder');
         Route::get('products/attributes', 'AjaxController@getAllAttributes');
         Route::resource('categories', 'CategoryController');
         Route::resource('send-email', 'SendEmailController');
@@ -62,11 +69,12 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
         Route::resource('customers', 'CustomerController');
         Route::resource('tags', 'TagController');
         Route::resource('blogs', 'BlogController');
-        Route::get('albums-images', 'AlbumImageController@index')->name('albums-images');
-        Route::post('albums-images', 'AlbumImageController@store');
-        Route::delete('albums-images/{album}/delete', 'AlbumImageController@destroy');
-        Route::patch('albums-images/{album}/display', 'AlbumImageController@display');
-        Route::patch('albums-images/{album}/un-display', 'AlbumImageController@unDisplay');
+        // Route::get('albums-images', 'AlbumImageController@index')->name('albums-images');
+        // Route::post('albums-images', 'AlbumImageController@store');
+        // Route::delete('albums-images/{album}/delete', 'AlbumImageController@destroy');
+        // Route::patch('albums-images/{album}/display', 'AlbumImageController@display');
+        // Route::patch('albums-images/{album}/un-display', 'AlbumImageController@unDisplay');
+        Route::put('users/set-admin','CustomerController@setAdmin')->name('setAdmin');
         Route::get('contact', 'ContactController@index');
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('assign-roles/{role}', 'AssignRoleController@index')->name('assign-roles.index');
@@ -86,16 +94,14 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
     // Auth::routes();
 
     Route::get('login','AuthController@login')->name('login');
-    Route::get('register','AuthController@login')->name('register');
-    // Route::get('login','AuthController@login')->name('login');
-    // Route::get('login','AuthController@login')->name('login');
-    // Route::get('login','AuthController@login')->name('login');
-    Route::post('login','AuthController@checkLogin')->name('login');
+    Route::get('register','AuthController@register')->name('register');
     Route::get('logout', 'AuthController@logout')->name('logout');
+    Route::post('register','AuthController@registered')->name('registered');
+    Route::post('login','AuthController@checkLogin')->name('checkLogin');
 });
 
-Route::get('test', function(){
-
-})->name('test');
+Route::get('test',function(){
+    dd(Promo::first());
+});
 
 

@@ -10,7 +10,8 @@ class SystemSettingController extends Controller
 {
     public function edit()
     {
-        $provinces = Province::all();
+        // $provinces = Province::all();
+        $provinces = getData()->getDataFromType('locations/provinces')->data;
         return view('backend.setting.system_setting', compact('provinces'));
     }
 
@@ -20,7 +21,7 @@ class SystemSettingController extends Controller
         if (request()->has('logo')) {
             delete_file($setting->logo);
         }
-        
+
         if (request()->has('favicon')) {
             delete_file($setting->favicon);
         }

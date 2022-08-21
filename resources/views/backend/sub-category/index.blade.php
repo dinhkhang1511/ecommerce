@@ -19,7 +19,7 @@
             <div class="card-body">
                 <h4 class="card-title">Sub Categories Table</h4>
                 <div class="table-responsive">
-                    <a href="{{ url('excel/sub-categories') }}">
+                    <a href="{{ $api_url . '/excel/categories' }}">
                         <button type="button" class="btn btn-primary mb-3">EXCEL</button>
                     </a>
                     <div class="form-group">
@@ -41,15 +41,15 @@
                                 <td>{{ $subCategory->name }}</td>
                                 <td>{{ $subCategory->category->name }}</td>
                                 <td>
-                                    <a href="{{ route('sub-categories.edit', ['sub_category' => $subCategory->id ]) }}" 
-                                        data-toggle="tooltip" data-original-title="Edit"> 
-                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    <a href="{{ route('sub-categories.edit', ['sub_category' => $subCategory->id ]) }}"
+                                        data-toggle="tooltip" data-original-title="Edit">
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i>
                                     </a>
                                     <form action="{{ route('sub-categories.destroy', ['sub_category' => $subCategory->id ]) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete"> 
-                                            <i class="fa fa-close text-danger"></i> 
+                                        <button class="btn-none" type="submit" data-toggle="tooltip" data-original-title="Delete">
+                                            <i class="fa fa-close text-danger"></i>
                                         </button>
                                     </form>
                                 </td>
