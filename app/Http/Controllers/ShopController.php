@@ -27,7 +27,7 @@ class ShopController extends Controller
     {
         $products = getData()->getDataWithParam('filter', request()->all());
         $products = collect($products);
-        $categories = getData()->getDataWithParam('categories',['limit' => 3 ,'parent' => 1])->categories;
+        $categories = getData()->getDataWithParam('categories',['limit' => 4 ,'parent' => 1])->categories;
         $subCategories = getData()->getDataWithParam('categories',['parent' => 0, 'limit' => 'all'])->categories;
         $sizes = getData()->getDataFromType('sizes')->sizes;
         $colors = getData()->getDataFromType('colors')->colors;
