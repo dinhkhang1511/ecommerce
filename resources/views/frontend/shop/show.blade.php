@@ -290,6 +290,68 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <h3 class="related-title">Recent view</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div id="recent-products" class="owl-carousel">
+                    @foreach ($recentViewProducts as $product)
+                        <div class="col-12">
+                            <div class="product__item sale">
+                                <div class="product__item__pic set-bg" data-setbg="{{$api_asset_url . $product->first_image }}">
+                                    @if ($product->discount > 0)
+                                        <span class="label">Sale</span>
+                                    @endif
+                                    <ul class="product__hover">
+                                        <li>
+                                            <form action="{{ route('wishlist.store') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                <button type="submit" class="wishlist">
+                                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('product-details', ['product' => $product->id]) }}">
+                                                <button type="submit" class="wishlist">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6>{{ $product->name }}</h6>
+                                    <a href="{{ route('product-details', ['product' => $product->id]) }}"
+                                        class="add-cart">+ Add To Cart</a>
+                                    <div class="rating">
+                                        @for ($i = 0; $i < $product->rating; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+
+                                        @for ($i = 5; $i > $product->rating; $i--)
+                                            <i class="fa fa-star-o"></i>
+                                        @endfor
+                                    </div>
+                                    <h5 class="discount">
+                                        {{ money($product->after_discount) }}
+                                        @if ($product->discount > 0)
+                                            <span>{{ money($product->price) }}</span>
+                                        @endif
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="related spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
                     <h3 class="related-title">Related Product</h3>
                 </div>
             </div>

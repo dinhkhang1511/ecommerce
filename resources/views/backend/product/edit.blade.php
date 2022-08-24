@@ -64,7 +64,7 @@
                                                     </div>
                                                     <tr>
                                                         <td>
-                                                            <select class="custom-select" name="sizes[]">
+                                                            <select id="select-sizes" class="custom-select" name="sizes[]">
                                                                 <option selected value="">Sizes</option>
                                                                 @foreach ($sizes as $size)
                                                                     <option value="{{ $size->id }}" @if ($size->id == $attribute->size_id) selected @endif>
@@ -74,7 +74,7 @@
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="custom-select" name="colors[]">
+                                                            <select id="select-colors" class="custom-select" name="colors[]">
                                                                 <option selected value="">Colors</option>
                                                                 @foreach ($colors as $color)
                                                                     <option value="{{ $color->id }}" @if ($color->id == $attribute->color_id) selected @endif>

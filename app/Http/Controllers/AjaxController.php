@@ -22,14 +22,9 @@ class AjaxController extends Controller
     public function getColor($product, $size)
     {
         // loại bỏ color trùng id để sửa lỗi hiện thị color trùng
-        $attributes = ProductAttribute::where('product_quantity', '>', 0)
-                    ->where('product_id', $product)
-                    ->where('size_id', $size)
-                    ->get()
-                    ->unique('color_id');
+        $data = GetData()->getDataFromType("get-colors/$product/$size");
 
-        $attributes->load('color');
-        return $attributes;
+        return $data;
 
         // $attributes = GetData()->getDataFromType("get-colors/$product/$size");
         // return $attributes;
@@ -37,10 +32,9 @@ class AjaxController extends Controller
 
     public function getAttribute()
     {
-        return ProductAttribute::where('product_id', request('product'))
-                    ->where('size_id', request('size'))
-                    ->where('color_id', request('color'))
-                    ->first();
+        $data = GetData()->getDataWithParam('get-attribute',request()->all(),[]);
+
+        return response()->json($data);
     }
 
     public function getDistrict($id)

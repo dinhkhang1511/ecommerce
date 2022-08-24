@@ -42,7 +42,6 @@ class ShopController extends Controller
         if($response->successful())
         {
             $data = $this->respondToData($response);
-
             $response = Http::get("$this->api_url/getRelatedProduct" , ['product_id' => $id]);
             if($response->successful())
             {
@@ -55,15 +54,15 @@ class ShopController extends Controller
 
             $product = $data->product;
             $reviews = $data->product->reviews;
-            // * Filter data
+            $recentViewProducts = collect($data->recentView);
 
             $sizes = [];
             $colors = [];
             $this->filterAttributes($sizes,$colors,$product);
 
-            return view('frontend.shop.show', compact('product', 'relatedProducts', 'reviews', 'sizes', 'colors'));
+            return view('frontend.shop.show', compact('product','recentViewProducts', 'relatedProducts', 'reviews', 'sizes', 'colors'));
         }
-        return redirect('home')->with('error','Something went wrong...');
+        return error();
 
         // //thêm vào sản phẩm đã xem cho user đã đăng nhâp
         // ViewedProduct::view($product);

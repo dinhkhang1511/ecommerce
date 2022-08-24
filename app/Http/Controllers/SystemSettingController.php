@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Province;
 use App\Models\SystemSetting;
 use App\Http\Requests\SystemSettingUpdateRequest;
+use Illuminate\Support\Facades\Cookie;
 
 class SystemSettingController extends Controller
 {
@@ -17,16 +18,11 @@ class SystemSettingController extends Controller
 
     public function update(SystemSettingUpdateRequest $request)
     {
-        $setting = SystemSetting::all()->first();
-        if (request()->has('logo')) {
-            delete_file($setting->logo);
-        }
+        $headers = ['access_token' => Cookie::get('access_token')];
+        $response = HttpService()->updateDataWithBody('systemSettings',1, $request->validated(),$headers);
+        if($response->status == 401)
+            return error('login');
 
-        if (request()->has('favicon')) {
-            delete_file($setting->favicon);
-        }
-
-        $setting->update($request->validated());
-        return back();
+        return back()->with('success', 'Operation Successful');
     }
 }

@@ -111,7 +111,7 @@
                             <p>District</p>
                             <select class="custom-select" name="district_id" id="district">
                                 @if ($setting->province_id != null)
-                                    @foreach ($setting->province->load('districts')->districts as $district)
+                                    @foreach ($setting->province->districts as $district)
                                         <option value="{{ $district->id }}"
                                             @if($district->id == $setting->district_id) selected @endif>
                                             {{ $district->name }}
@@ -130,7 +130,7 @@
                             <p>Ward</p>
                             <select class="custom-select" name="ward_id" id="ward">
                                 @if ($setting->district_id != null)
-                                    @foreach ($setting->district->load('wards')->wards as $ward)
+                                    @foreach ($setting->district->wards as $ward)
                                         <option value="{{ $ward->id }}"
                                             @if($ward->id == $setting->ward_id) selected @endif>
                                             {{ $ward->name }}
