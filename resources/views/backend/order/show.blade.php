@@ -51,13 +51,22 @@
                                             <td>{{ $order->discount }}%</td>
                                         </tr>
                                         <tr>
+                                            <td>Created at</td>
+                                            <td>{{ $order->created_at }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Updated at</td>
+                                            <td>{{ $order ->updated_at }}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Status</td>
                                             <td>
-                                                <input type="hidden" id="order_id" value="{{ $order->id }}">
-                                                <select class="form-control" id="order_status">
+                                                {{-- <input class="order_id" type="hidden" id="order_id" value="{{ $order->id }}"> --}}
+                                                <select class="form-control order_status" id="order_status" data-id="{{ $order->id }}">
                                                     <option {{ $order->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                                     <option {{ $order->status == 'Shipping' ? 'selected' : '' }}>Shipping</option>
                                                     <option {{ $order->status == 'Delivered' ? 'selected' : '' }}>Delivered</option>
+                                                    <option {{ $order->status == 'Canceled' ? 'selected' : '' }}>Canceled</option>
                                                 </select>
                                             </td>
                                         </tr>

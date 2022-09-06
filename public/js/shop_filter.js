@@ -166,20 +166,28 @@ $(".colorFilter").on("click", function(e) {
     ajaxFilter();
 });
 
+let timer;
+
 $("#nameFilter").on("keyup", function(e) {
-    e.preventDefault();
-    var name = $(this).val();
-    var currentUrl = $("#filterUrl").val();
-    var currentName = currentUrl.slice(
-        currentUrl.indexOf("name="),
-        currentUrl.indexOf("&offset=")
-    );
-    $("#filterUrl")
-        .val(function(i, v) {
-            return v.replace(currentName, "name=" + name);
-        })
-        .val();
-    ajaxFilter();
+
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+
+        e.preventDefault();
+        var name = $(this).val();
+        var currentUrl = $("#filterUrl").val();
+        var currentName = currentUrl.slice(
+            currentUrl.indexOf("name="),
+            currentUrl.indexOf("&offset=")
+        );
+        $("#filterUrl")
+            .val(function(i, v) {
+                return v.replace(currentName, "name=" + name);
+            })
+            .val();
+        ajaxFilter();
+    }, 500);
+
 });
 
 $("#sortby").on("change", function(e) {

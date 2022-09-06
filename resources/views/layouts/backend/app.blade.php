@@ -71,7 +71,7 @@
                                     <li>
                                         <div class="message-center">
                                             @foreach ($current_user->unread_notifications as $item)
-                                            <a href="{{ $item->data->url }}?notification={{ $item->id }}">
+                                            <a href="{{ $item->data->url }}">
                                                 <div class="btn btn-danger btn-circle">
                                                     <i class="{{ $item->data->icon ?? 'fas fa-wallet' }}"></i>
                                                 </div>

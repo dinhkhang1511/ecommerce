@@ -52,9 +52,9 @@
             </div>
         </div>
         <div class="offcanvas__nav__option">
-            <a href="{{route('shop')}}" class="search-switch">
+            {{-- <a href="{{route('shop')}}" class="search-switch">
                 <i class="fa fa-search"></i>
-            </a>
+            </a> --}}
             <a href="{{ route('wishlist.index') }}">
                 <i class="far fa-heart"></i>
             </a>

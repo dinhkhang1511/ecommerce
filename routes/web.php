@@ -74,6 +74,7 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
         // Route::delete('albums-images/{album}/delete', 'AlbumImageController@destroy');
         // Route::patch('albums-images/{album}/display', 'AlbumImageController@display');
         // Route::patch('albums-images/{album}/un-display', 'AlbumImageController@unDisplay');
+        Route::get('statistics/orders', 'OrderController@groupOrder')->name('statistic-orders');
         Route::put('users/set-admin','CustomerController@setAdmin')->name('setAdmin');
         Route::get('contact', 'ContactController@index');
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -96,8 +97,18 @@ Route::group(['middleware'=>'HtmlMinifier'], function () {
     Route::get('login','AuthController@login')->name('login');
     Route::get('register','AuthController@register')->name('register');
     Route::get('logout', 'AuthController@logout')->name('logout');
+    Route::get('forgot-password','AuthController@forgetPassword')->name('forgot-password');
+    Route::get('reset-password','AuthController@checkToken')->name('reset-password');
+
     Route::post('register','AuthController@registered')->name('registered');
     Route::post('login','AuthController@checkLogin')->name('checkLogin');
+    Route::post('reset-password','AuthController@changePassword')->name('reset-password');
+    Route::post('change-password','AuthController@forgetPassword')->name('change-password');
+    Route::post('update-password','AuthController@updatePassword')->name('update-password');
+
+
+
+
 });
 
 Route::get('test',function(){

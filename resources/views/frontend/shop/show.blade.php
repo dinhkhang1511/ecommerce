@@ -286,6 +286,7 @@
             </div>
         </div>
     </section>
+    @if(!$recentViewProducts->isEmpty())
     <section class="related spad">
         <div class="container">
             <div class="row">
@@ -348,6 +349,7 @@
             </div>
         </div>
     </section>
+    @endif
     <section class="related spad">
         <div class="container">
             <div class="row">

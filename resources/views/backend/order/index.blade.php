@@ -22,9 +22,21 @@
             <div class="card-body">
                 <h4 class="card-title">Orders Table</h4>
                 <div class="table-responsive">
-                    <a href="{{  $api_url . '/excel/orders'  }}">
-                        <button type="button" class="btn btn-primary mb-3">EXCEL</button>
-                    </a>
+                        <div class="float-left">
+                            <a href="http://localhost:8888/api/excel/orders">
+                                <button type="button" class="btn btn-primary mb-3">EXCEL</button>
+                            </a>
+                        </div>
+
+                        <div class="float-right">
+                            <select class="form-control " id="sort-order" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <option value="{{route('orders.index')}}" {{$status == 'status' ? 'selected' : ''}}> Status </option>
+                                @foreach($allStatus as $index)
+                                    <option value="{{route('orders.index')}}?status={{$index}}" {{strtolower($status) == strtolower($index) ? 'selected' : ''}}> {{$index}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     <div class="form-group">
                         <input type="text" class="form-control" id="search" placeholder="Type to search" autofocus>
                     </div>
@@ -36,6 +48,7 @@
                                 <th>Customer Email</th>
                                 <th>Status</th>
                                 <th>Price</th>
+                                <th>Created at</th>
                                 <th class="text-nowrap">Action</th>
                             </tr>
                         </thead>
@@ -49,6 +62,7 @@
                                     <span class="label {{ $order->status_color }}">{{ $order->status }}</span>
                                 </td>
                                 <td>{{ $order->price }}</td>
+                                <td>{{ $order->created_at }}</td>
                                 <td>
                                     <a href="{{ route('orders.show', ['order' => $order->id ]) }}"
                                         data-toggle="tooltip" data-original-title="View">
@@ -63,10 +77,10 @@
                 <nav aria-label="...">
                     <ul class="pagination">
                       <li class="page-item {{$page == '1' ? 'disabled' : ''}} ">
-                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}" tabindex="-1">Previous</a>
+                        <a class="page-link" href="{{route('orders.index')}}?page={{$page-1}}{{request('limit') ? '&limit='.request('limit') : ''}}{{request('status') ? '&status='.request('status') : ''}}" tabindex="-1">Previous</a>
                       </li>
                       <li class="page-item {{$page == $data->meta->last_page ? 'disabled' : ''}}" >
-                        <a class="page-link" href="{{route('blogs.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}" >Next</a>
+                        <a class="page-link" href="{{route('orders.index')}}?page={{$page+1}}{{request('limit') ? '&limit='.request('limit') : ''}}{{request('status') ? '&status='.request('status') : ''}}" >Next</a>
                       </li>
                     </ul>
                 </nav>

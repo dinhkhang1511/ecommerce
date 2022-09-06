@@ -27,13 +27,13 @@
                     <input type="hidden" value="0" name="discount" id="discount">
                     <div class="row edit-input-btn">
                         <div class="col-lg-8 col-md-6 mb-5">
-                            @guest
+                            @if(!$user)
                                 <h6 class="coupon__code">
                                     <i class="fa fa-tag"></i>
                                     Have an account?
                                     <a href="{{ route('login') }}">Click here to login</a>
                                 </h6>
-                            @endguest
+                            @endif
 
                             <h6 class="checkout__title">Billing Details</h6>
                             <div class="row">

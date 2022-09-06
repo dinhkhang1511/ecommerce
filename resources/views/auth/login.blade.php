@@ -59,7 +59,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="login_as_admin">
                                     <label class="custom-control-label" for="login_as_admin">Continue as admin</label>
-                                    <a href="/password/reset" id="to-recover" class="text-dark pull-right">
+                                    <a href="{{route('forgot-password')}}" id="to-recover" class="text-dark pull-right">
                                         <i class="fa fa-lock m-r-5"></i> Forgot password?
                                     </a>
                                 </div>

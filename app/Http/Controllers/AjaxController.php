@@ -16,7 +16,12 @@ class AjaxController extends Controller
     public function findPromos($code)
     {
         $promo = GetData()->getDataWithParam('find-promo', ['code' => $code], []);
-        return response()->json($promo);
+        if(! collect($promo)->isEmpty())
+        {
+            return response()->json($promo);
+        }
+        else
+            die;
     }
 
     public function getColor($product, $size)

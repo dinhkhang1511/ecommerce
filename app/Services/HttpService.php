@@ -22,7 +22,7 @@ class HttpService
     public function postDataWithBody($endpoint, $body, $headers = [])
     {
             $response = Http::withHeaders($headers)->post("$this->api_url/$endpoint",$body);
-            if($response->successful())
+            if($response->successful() || $response->status() == 404)
             {
                 $payload = json_decode($response->getBody()->getContents());
                 return $payload;
@@ -39,11 +39,17 @@ class HttpService
     }
 
 
-    public function updateDataWithBody($endpoint, $id, array $body, $headers)
+    public function updateDataWithBody($endpoint, $id, array $body, $headers, $method = 'PATCH')
     {
         $url = "$this->api_url/$endpoint/$id";
 
-        $response = Http::withHeaders($headers)->patch($url,$body);
+        if($method == 'POST')
+        {
+            $response = Http::withHeaders($headers)->post($url,$body);
+        }
+        else
+            $response = Http::withHeaders($headers)->patch($url,$body);
+
         if($response->successful() || $response->status() == 402)
         {
             $payload = json_decode($response->getBody()->getContents());
@@ -53,7 +59,6 @@ class HttpService
             return json_decode($response->getBody()->getContents());
         else
             $response->throw();
-
     }
 
     public function getDataFromId($endpoint,$id) : object

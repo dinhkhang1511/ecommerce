@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordChangeRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -81,5 +82,40 @@ class AuthController extends Controller
         $request->session()->forget('user');
         Cookie::queue(Cookie::forget('access_token'));
         return success('login');
+    }
+
+    public function forgetPassword()
+    {
+        return view('auth.passwords.email');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $response = HttpService()->postDataWithBody('forget-password', $request->all());
+        if($response->status == 404)
+            return redirect()->back()->with('error','Email is not exist in our system');
+
+        return redirect()->back()->with('success','The link to reset password has been sent to your email');
+    }
+
+    public function checkToken(Request $request)
+    {
+
+        $response = HttpService()->postDataWithBody('check-token', $request->all());
+        if($response->status != 200)
+            return error('forgot-password',$response->errors);
+
+        return view('auth.passwords.reset')->with('token', $request->token);
+    }
+
+    public function updatePassword(PasswordChangeRequest $request)
+    {
+        $response = HttpService()->postDataWithBody('reset-password', $request->validated());
+        if($response->status != 200)
+            return error('forgot-password',$response->errors);
+
+        return success();
     }
 }

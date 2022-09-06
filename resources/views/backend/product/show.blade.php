@@ -43,11 +43,11 @@
                                         </tr>
                                         <tr>
                                             <td>Sizes</td>
-                                            <td>{{ implode(', ',collect($product->sizes)->pluck('name')->toArray()) }}</td>
+                                            <td>{{ implode(', ',collect($product->sizes)->pluck('name')->unique()->toArray()) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Colors</td>
-                                            <td>{{ implode(', ',collect($product->colors)->pluck('name')->toArray()) }}</td>
+                                            <td>{{ implode(', ',collect($product->colors)->pluck('name')->unique()->toArray()) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Category</td>

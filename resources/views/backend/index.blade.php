@@ -281,14 +281,14 @@
                                     <td class="txt-oflo">{{ $item->customer_name }}</td>
                                     <td class="txt-oflo">{{ $item->customer_email }}</td>
                                     <td class="txt-oflo">{{ $item->customer_phone }}</td>
-                                    <td class="txt-oflo">{{ $item->price }}</td>
+                                    <td class="txt-oflo">{{ money($item->price) }}</td>
                                     <td>
-                                        <input type="hidden" value="{{ $item->id }}" id="order_id">
-                                        <select class="form-control" id="order_status">
+                                        {{-- <input class="order_id" type="hidden" value="{{ $item->id }}" id="order_id"> --}}
+                                        <select class="form-control order_status" id="order_status" data-id="{{ $item->id}}">
                                             <option {{ $item->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                             <option {{ $item->status == 'Shipping' ? 'selected' : '' }}>Shipping</option>
-                                            <option {{ $item->status == 'Delivered' ? 'selected' : '' }}>Delivered
-                                            </option>
+                                            <option {{ $item->status == 'Delivered' ? 'selected' : '' }}>Delivered</option>
+                                            <option {{ $item->status == 'Canceled' ? 'selected' : '' }}>Canceled</option>
                                         </select>
                                         {{-- <span class="label {{ $item->status_color }}">{{ $item->status }}</span> --}}
                                     </td>

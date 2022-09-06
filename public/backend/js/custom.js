@@ -107,16 +107,16 @@ $("#files").on("change", function() {
     );
 });
 
-$("#order_status").on("change", function() {
-    var order_id =
-        $(this)
-            .parent("select")
-            .siblings("#order_id").length > 0
-            ? $(this)
-                  .parent("select")
-                  .siblings("#order_id")
-                  .val()
-            : $("#order_id").val();
+$(".order_status").on("change", function() {
+    var order_id = $(this).attr("data-id");
+        // $(this)
+        //     .parent("select")
+        //     .siblings(".order_id").length > 0
+        //     ? $(this)
+        //           .parent("select")
+        //           .siblings(".order_id")
+        //           .val()
+        //     : $(".order_id").val();
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -129,7 +129,16 @@ $("#order_status").on("change", function() {
             status: $(this).val()
         },
         success: function(data) {
-            // console.log(data);
+            console.log(data);
+            $.toast({
+                heading: "Success",
+                text: "Operation Success",
+                position: "top-right",
+                loaderBg: "#ff6849",
+                icon: "success",
+                hideAfter: 3500,
+                stack: 6
+            });
         },
         statusCode: {
             401: function() {

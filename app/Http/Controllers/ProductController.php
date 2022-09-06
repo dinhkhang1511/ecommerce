@@ -73,7 +73,6 @@ class ProductController extends Controller
 
     public function update(ProductStoreRequest $request, $id)
     {
-        // TODO: PUT DATA TO SERVER
         $token = Cookie::get('access_token');
         $headers = ['access_token'  => $token];
         if($request->hasFile('images0'))
@@ -82,21 +81,13 @@ class ProductController extends Controller
             $response = HttpService()->updateDataWithOptions('products',$id, $options, $headers);
         }else
         {
-            $body = $request->all();
-            $response = HttpService()->updateDataWithBody('products',$id, $body, $headers);
+            $body = $request->validated();
+            $response = HttpService()->updateDataWithBody('products',$id, $body, $headers, 'POST');
         }
         if( ($response->status ?? 200) == 402)
             return back()->with('errors', $response->errors);
 
-
         return success('products.index');
-        // !------------------------------------
-        // $product->update($request->validated());
-        // $product->sizes()->detach();
-        // $product->attributes()->createMany(ProductAttribute::getData());
-        // ProductImage::updateItem($product->attributes);
-        // return success('products.index');
-        // return back()->with('error','functioning');
     }
 
     public function destroy($id)

@@ -24,15 +24,15 @@
                             </button>
                         </div>
                     @endif
-                    <form action="{{ route('password.update') }}" class="form-horizontal form-material" method="POST">
+                    <form action="{{ route('update-password') }}" class="form-horizontal form-material" method="POST">
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
                         <h3 class="box-title m-b-20">Reset Password</h3>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email', $email) }}" required autocomplete="email"
-                                    autofocus placeholder="Email">
+                                {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email','') }}" required autocomplete="email"
+                                    autofocus placeholder="Email"> --}}
                             </div>
                         </div>
                         <div class="form-group">

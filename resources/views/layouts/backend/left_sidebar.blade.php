@@ -82,13 +82,19 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('statistic-orders') }}"class="waves-effect waves-dark">
+                        <i class="ti-stats-up"></i>
+                        <span class="hide-menu">Revenue statistics</span>
+                    </a>
+                </li>
+                <li>
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
                         aria-expanded="false">
                         <i class="fas fa-globe-asia"></i>
                         <span class="hide-menu">Communication</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{ route('send-email.create') }}">Inbox</a></li>
+                        {{-- <li><a href="{{ route('send-email.create') }}">Inbox</a></li> --}}
                         <li><a href="{{ url('contact') }}">Contact Message</a></li>
                         <li><a href="{{ route('customers.index') }}">Customers</a></li>
                     </ul>
